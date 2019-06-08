@@ -1,0 +1,144 @@
+html {
+    scroll-behavior: smooth;
+  }
+
+body {
+    background: #1a1a1a;
+    color:#f7eaea;
+    word-wrap: break-word;
+    font-family:'Open Sans', 'Helvetica Neue', sans-serif; 
+    font-size: 20px;   
+}
+
+article {
+    padding: 20px;
+    background-color: #4d4d4d;
+    border-radius: 2%;
+    margin-top: 30px;
+}
+
+.content {
+    max-width: 880px;
+    margin-left: auto;
+    margin-right: auto;
+    transition: all 1s;        
+}
+
+.list_menu {
+    max-width: 270px;  
+    margin: 5px auto 5px auto;
+    padding: 5px;
+    background-color: #b0b0b4;
+    border-radius: 10%;
+    text-align: center;     
+}
+
+
+.list_menu:hover {
+    background: #ffe680;
+    font-weight: bold;   
+}
+
+a:link {
+    color:  #4d4d4d;
+    text-decoration: none;
+}
+
+a:visited {
+    color: #7e1b1b;
+}
+
+#pic_nav {
+    max-width: 920px;
+    height: 575px;
+    min-width: 100px;
+    background: #4d4d4d;
+    border-radius: 8%;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 105%;   
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 25px;
+}
+
+#fotoperfil {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 300px;
+    height: 300px;
+    border-style: solid;
+    border-color:#ffe680;
+    border-radius: 50%;
+    box-shadow: 5px 5px 10px gray;    
+}
+
+#menu {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    list-style: none;
+    padding-inline-start: 0px;
+   
+}
+
+.titles {
+    font-family: Arial, Helvetica, sans-serif;
+    text-transform: uppercase;
+    text-align: center;
+    background-color: #313131;
+    border-radius: 5%;
+    padding: 15px;
+}
+
+#name {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 45px;
+    color: #ffe680;
+}
+
+h3 {
+    font-size: 36px;
+    color: #ecc010;
+}
+span {
+    font-weight: bold;
+    font-size: 20px;
+    color: #f8c842;
+}
+
+#conocimientos {
+    max-width: 880px;
+}   
+
+#portfolio {
+    max-width: 880px;
+    margin-left: auto;
+    margin-right: auto;
+    transition: all 250ms ease-in-out;
+    }
+
+#list_portfolio {
+    display: inline-block;  
+    list-style: none;
+}
+.img_left_middle {    
+    padding: 20px 10px 10px 20px;
+    margin: 0px 37px 10px 0px;
+    float: left;
+   
+    width: 212px;
+    text-align: center; 
+}
+
+.img_right {   
+    padding: 20px 10px 10px 20px;
+    margin: 0px 37px 10px 0px;
+    float: left;
+   
+    width: 212px;
+    text-align: center; 
+}
+
+
+

@@ -4,7 +4,7 @@ var saldoCuenta = 700;
 var limiteExtraccion = 2000;
 var password = 1234;
 var autorizado = false;
-var confirmacion = true;
+
 
 
 
@@ -107,7 +107,7 @@ function cambiarLimiteDeExtraccion()
                    }
                    else
                    {
-                       alert("Solo pueden extraerse billetes de $100.")
+                       alert("Solo pueden extraerse billetes de $100, por ende su límite de extracción debe ser múltiplo de 100.")
                        nuevoLimiteExtraccion = prompt("Por favor, ingrese su nuevo límite de extracción (múltiplo de 100):");
                        if(nuevoLimiteExtraccion === null) {return}
                    }
@@ -319,27 +319,92 @@ function depositarDinero()
     }
 }
 */
-function pagarServicio() 
+
+
+//validaciones
+//si servicioAPagar es numero
+    //else: Ha ingresado un elemento inválido. Por favor, ingrese el número correspondiente al servicio a pagar:
+
+//si servicioAPagar es 1, 2, 3 o 4
+    //else: El número que ha ingresado no corresponde a ningún servicio existente. Por favor, ingrese el número correspondiente al servicio a pagar:
+
+//si servicioAPagar es menor a saldoCuenta
+    //else: No tiene saldo suficiente para pagar este servicio.
+
+
+
+
+function pagarServicio()
 {
+    var datosValidos = false;
+    var confirmPagar = true;
+
     if (autorizado)
     {
         var servicioAPagar = prompt("Por favor, ingrese el número que corresponda al servicio que desea pagar: \n1-Teléfono \n2-Luz \n3-Internet \n4- Agua");
-        if(servicioAPagar === null)
+        if(servicioAPagar === null) {return}
+        while(!datosValidos)
         {
-            return false;
+            if (!isNaN(servicioAPagar))
+            {
+                if (servicioAPagar < saldoCuenta)
+                {
+                    datosValidos = true;
+                }
+                else
+                {
+                    alert("No tiene saldo suficiente para pagar este servicio.")
+                    if(servicioAPagar === null) {return}
+                 }
+            }    
+            else
+            {
+                servicioAPagar = prompt("Ha ingresado un elemento inválido. Por favor, ingrese únicamente el número correspondiente al servicio a pagar: \n1-Teléfono \n2-Luz \n3-Internet \n4- Agua")
+                if(servicioAPagar === null) {return}
+            }
         }
-                
-        function noSaldoDisponible()
-        {
-            alert("No tiene saldo suficiente para pagar este servicio.")
-        }
+
+        servicioAPagar = parseInt(servicioAPagar);
+        actualizarSaldoEnPantalla();
+        /*saldoAnterior = saldoCuenta;
+        restarDinero(dineroExtraido);
+       
+        alert("Ha extraido: $" + dineroExtraido + "." + "\nSu saldo anterior: $" + saldoAnterior + "." + "\nSu saldo actual: $" + saldoCuenta + ".");  */
         
+        
+        //validaciones
+        //si servicio es mayor a saldoCuenta
+
+        //si confirmacion es igual a true
         while (true)
         {
+            //var datosValidos = false;
+            
             switch(servicioAPagar)
             {
-                case "1":
+                case 1:
                     if(telefono > saldoCuenta)
+                    {
+                        alert("No tiene saldo suficiente para pagar este servicio.")
+                        return;
+                    }
+                    else
+                    {
+                        var confirmPagar = confirm("Ud debe $" + telefono + " de teléfono. ¿Desea concretar el pago?"); 
+                        if(confirmPagar === false){return}
+                        {                                                              
+                            saldoAnterior = saldoCuenta;                    
+                            restarDinero(telefono);
+                            actualizarSaldoEnPantalla();
+                            alert("El pago se ha realizado correctamente.\nSaldo anterior: $" + saldoAnterior + "\nDinero descontado: $" + telefono + "\nSaldo actual: $" + saldoCuenta);
+                            return;
+                        }
+
+                    
+                    }
+                    
+                            
+                   /* if(telefono > saldoCuenta)
                     {
                         noSaldoDisponible();
                         return;
@@ -358,10 +423,30 @@ function pagarServicio()
                     {
                         falseConfirmacion();
                         return;
-                    }
+                    }*/
                    
-                case "2":
+                case 2:
                     if(luz > saldoCuenta)
+                    {
+                        alert("No tiene saldo suficiente para pagar este servicio.")
+                        return;
+                    }
+                    else
+                    {
+                        var confirmPagar = confirm("Ud debe $" + luz + " de luz. ¿Desea concretar el pago?"); 
+                        if(confirmPagar === false){return}
+                        {                                                              
+                            saldoAnterior = saldoCuenta;                    
+                            restarDinero(luz);
+                            actualizarSaldoEnPantalla();
+                            alert("El pago se ha realizado correctamente.\nSaldo anterior: $" + saldoAnterior + "\nDinero descontado: $" + luz + "\nSaldo actual: $" + saldoCuenta);
+                            return;
+                        }
+
+                    
+                    }
+                    
+                    /*if(luz > saldoCuenta)
                     {
                         noSaldoDisponible();
                         return;
@@ -382,64 +467,75 @@ function pagarServicio()
                     {
                         falseConfirmacion();
                         return;
-                    }
-                case "3":
+                    }*/
+                case 3:
                      
                     if(internet > saldoCuenta)
                     {
-                        noSaldoDisponible();
+                        alert("No tiene saldo suficiente para pagar este servicio.")
                         return;
-                    }
-
-                    var confirmacion = confirm("Ud debe $" + internet + " de teléfono. ¿Desea concretar el pago?");                    
-                    if(confirmacion === true)
-                    {                                                             
-                        saldoAnterior = saldoCuenta;                    
-                        restarDinero(internet);
-                        actualizarSaldoEnPantalla();
-                        alert("El pago se ha realizado correctamente.\nSu saldo anterior: $" + saldoAnterior + "\nDinero descontado: $" + internet + "\nSu saldo actual: $" + saldoCuenta);
-                        return;                        
                     }
                     else
                     {
-                        falseConfirmacion();
-                        return;
-                    }
-
-                case "4":
-
-                        if(agua > saldoCuenta)
-                        {
-                            noSaldoDisponible();
+                        var confirmPagar = confirm("Ud debe $" + internet + " de internet. ¿Desea concretar el pago?"); 
+                        if(confirmPagar === false){return}
+                        {                                                              
+                            saldoAnterior = saldoCuenta;                    
+                            restarDinero(internet);
+                            actualizarSaldoEnPantalla();
+                            alert("El pago se ha realizado correctamente.\nSaldo anterior: $" + saldoAnterior + "\nDinero descontado: $" + internet + "\nSaldo actual: $" + saldoCuenta);
                             return;
                         }
-    
-                        var confirmacion = confirm("Ud debe $" + internet + " de teléfono. ¿Desea concretar el pago?");                    
-                        if(confirmacion === true)
-                        {                                                             
+
+                    
+                    }
+
+                case 4:
+
+                    if(agua > saldoCuenta)
+                    {
+                        alert("No tiene saldo suficiente para pagar este servicio.")
+                        return;
+                    }
+                    else
+                    {
+                        var confirmPagar = confirm("Ud debe $" + agua + " de agua. ¿Desea concretar el pago?"); 
+                        if(confirmPagar === false){return}
+                        {                                                              
                             saldoAnterior = saldoCuenta;                    
                             restarDinero(agua);
                             actualizarSaldoEnPantalla();
-                            alert("El pago se ha realizado correctamente.\nSu saldo anterior: $" + saldoAnterior + "\nDinero descontado: $" + agua + "\nSu saldo actual: $" + saldoCuenta);
-                            return;                        
-                        }
-                        else
-                        {
-                            falseConfirmacion();
+                            alert("El pago se ha realizado correctamente.\nSaldo anterior: $" + saldoAnterior + "\nDinero descontado: $" + agua + "\nSaldo actual: $" + saldoCuenta);
                             return;
                         }
+
+                    
+                    }
                 default:
-                    alert("No existe el servicio seleccionado.");
-                    servicioAPagar = prompt("Por favor, ingrese el número que corresponda al servicio que desea pagar: \n1-Teléfono \n2-Luz \n3-Internet \n4- Agua");
+                    {
+                        alert("No existe el servicio seleccionado.");
+                    }
+                    
             }
+            break;
         }
     }
     else
     {
         alert("Su cuenta está bloqueada. No puede realizar operaciones.");
     }
-
 }
+
+
+
+
+
+
+
+
+
+
+
 
 function transferirDinero() {
     if (autorizado)

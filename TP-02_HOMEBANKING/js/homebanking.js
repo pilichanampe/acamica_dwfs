@@ -100,8 +100,8 @@ function cambiarLimiteDeExtraccion()
                        }
                        else
                        {
-                           alert("No pueden ingresarse montos negativos o iguales a cero.")
-                           nuevoLimiteExtraccion = prompt("Por favor, ingrese una cantidad de extracción mayor a cero:");
+                           alert("No pueden ingresarse montos negativos o iguales a 0.")
+                           nuevoLimiteExtraccion = prompt("Por favor, ingrese una cantidad de extracción mayor a 0:");
                            if(nuevoLimiteExtraccion === null) {return}
                        }
                    }
@@ -176,8 +176,8 @@ function extraerDinero()
                             }
                             else
                             {
-                                alert("No pueden ingresarse montos negativos.")
-                                dineroExtraido = prompt("Por favor, ingrese una cantidad de extracción mayor a cero:");
+                                alert("No pueden ingresarse montos negativos o iguales a 0.")
+                                dineroExtraido = prompt("Por favor, ingrese una cantidad de extracción mayor a 0:");
                                 if(dineroExtraido === null) {return}
                             }
                         }
@@ -224,7 +224,85 @@ function extraerDinero()
 
 }
 
-function depositarDinero() {
+
+
+
+
+//validaciones:
+        //si nuevoLimiteExtraccion es un numero 
+            //else: Ha ingresado un elemento inválido. Por favor, utilice únicamente números para su depósito: 
+
+        
+
+        //si nuevoLimiteExtraccion es multiplo de 100
+            //else: Solo pueden depositarse billetes de $100. Por favor, ingrese un valor de depósito múltiplo de 100:
+
+        //si nuevoLimiteExtraccion es mayor que 0
+            //else: No pueden ingresarse montos negativos.
+        
+        
+
+
+
+
+
+
+function depositarDinero()
+{
+    var datosValidos = false;
+
+    if (autorizado)
+    {
+        var dineroADepositar = prompt("Por favor, ingrese la cantidad de dinero que desea depositar:");
+        if(dineroADepositar === null) {return}
+        while(!datosValidos)
+        {
+            if (!isNaN(dineroADepositar))
+            {
+                if (dineroADepositar % 100 == 0)
+                {
+                    if (dineroADepositar > 0)
+                    {
+                        datosValidos = true;
+                    }
+                    else
+                    {
+                        alert("No pueden ingresarse montos negativos o iguales a 0.")
+                        dineroADepositar = prompt("Por favor, ingrese un valor de depósito mayor a 0:");
+                        if(dineroADepositar === null) {return}
+                    }
+                }
+                else
+                {
+                     alert("Solo pueden depositarse billetes mayores a $100.")
+                     dineroADepositar = prompt("Por favor, ingrese un valor de depósito múltiplo de 100:");
+                     if(dineroADepositar === null) {return}
+                }
+             
+            
+            }
+            else
+            {
+                dineroADepositar = prompt("Ha ingresado un elemento inválido. Por favor, ingrese únicamente números para su depósito: ")
+                if(dineroADepositar === null) {return}
+            }
+        }
+
+
+        dineroADepositar = parseInt(dineroADepositar);
+        saldoAnterior = saldoCuenta;
+        sumarDinero(dineroADepositar);
+        actualizarSaldoEnPantalla();
+        alert("Ud ha depositado: $" + dineroADepositar + "." + "\nSaldo anterior: $" + saldoAnterior + "." + "\nSaldo actual: $" + saldoCuenta + ".");  
+    }
+    else
+    {
+        alert("Su cuenta está bloqueada. No puede realizar operaciones.");
+    }
+      
+
+}
+/*function depositarDinero() {
     if (autorizado)
     {
         var dineroDepositado = prompt("Por favor, ingrese la cantidad de dinero que desea depositar: ");
@@ -240,7 +318,7 @@ function depositarDinero() {
         alert("Su cuenta está bloqueada. No puede realizar operaciones.");
     }
 }
-
+*/
 function pagarServicio() 
 {
     if (autorizado)

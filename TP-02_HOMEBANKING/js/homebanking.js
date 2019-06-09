@@ -35,47 +35,6 @@ function restarDinero(cantDinero)
     saldoCuenta = saldoCuenta - cantDinero;
 }
 
-/*function cambiarLimiteDeExtraccion() {
-    if (autorizado)
-    {
-        nuevoLimiteExtraccion = prompt("Por favor, ingrese su nuevo límite de extracción:");
-        if(nuevoLimiteExtraccion === null) {return}
-
-        while (nuevoLimiteExtraccion % 100 != 0)
-        {
-             nuevoLimiteExtraccion = prompt("Solo podrán extraerse billetes de $100, por lo que su límite debe ser múltiplo de 100. Por favor, ingrese su nuevo límite de extracción (múltiplo de 100):");
-             if(nuevoLimiteExtraccion === null) {return}
-        }
-        
-        actualizarLimiteEnPantalla();
-
-        alert("Su nuevo límite de extracción es: $" + limiteExtraccion);
-    }
-    else
-    {
-        alert("Su cuenta está bloqueada. No puede realizar operaciones.");
-    }
-
-
-}*/
-
-//validaciones:
-        //*****/si nuevoLimiteExtraccion es un numero 
-            //else: Ha ingresado un elemento inválido. Por favor, utilice números para ingresar su nuevo límite de extracción: 
-
-        //******* */si nuevoLimiteExtraccion es menor o igual que maximoLimiteExtraccion
-            //else: Por seguridad, su límite de extracción no puede exceder a los $12000. Por favor, ingrese un monto igual o menor al máximo permitido:
-
-        //***** */si nuevoLimiteExtraccion es multiplo de 100
-            //else: Solo podrán extraerse billetes de $100, por lo que su límite debe ser múltiplo de 100. Por favor, ingrese su nuevo límite de extracción (múltiplo de 100):
-
-        //si nuevoLimiteExtraccion es mayor que 0
-            //else: No pueden ingresarse montos negativos.
-        
-        //limiteExtraccion = parseInt(nuevoLimiteExtraccion);
-
-
-
 function cambiarLimiteDeExtraccion()
 {
     var datosValidos = false;
@@ -140,17 +99,6 @@ function cambiarLimiteDeExtraccion()
       
 
 }
-
-
-
-
-
-
-
-
-
-
-
 
 function extraerDinero()
 {
@@ -224,29 +172,6 @@ function extraerDinero()
 
 }
 
-
-
-
-
-//validaciones:
-        //si nuevoLimiteExtraccion es un numero 
-            //else: Ha ingresado un elemento inválido. Por favor, utilice únicamente números para su depósito: 
-
-        
-
-        //si nuevoLimiteExtraccion es multiplo de 100
-            //else: Solo pueden depositarse billetes de $100. Por favor, ingrese un valor de depósito múltiplo de 100:
-
-        //si nuevoLimiteExtraccion es mayor que 0
-            //else: No pueden ingresarse montos negativos.
-        
-        
-
-
-
-
-
-
 function depositarDinero()
 {
     var datosValidos = false;
@@ -302,37 +227,6 @@ function depositarDinero()
       
 
 }
-/*function depositarDinero() {
-    if (autorizado)
-    {
-        var dineroDepositado = prompt("Por favor, ingrese la cantidad de dinero que desea depositar: ");
-        dineroDepositado = parseInt(dineroDepositado);
-
-        saldoAnterior = saldoCuenta;
-        sumarDinero(dineroDepositado);
-        actualizarSaldoEnPantalla();
-        alert("Ha depositado: $" + dineroDepositado + "\nSu saldo anterior: $" + saldoAnterior + "\nSu saldo actual: $" + saldoCuenta);
-    }
-    else
-    {
-        alert("Su cuenta está bloqueada. No puede realizar operaciones.");
-    }
-}
-*/
-
-
-//validaciones
-//si servicioAPagar es numero
-    //else: Ha ingresado un elemento inválido. Por favor, ingrese el número correspondiente al servicio a pagar:
-
-//si servicioAPagar es 1, 2, 3 o 4
-    //else: El número que ha ingresado no corresponde a ningún servicio existente. Por favor, ingrese el número correspondiente al servicio a pagar:
-
-//si servicioAPagar es menor a saldoCuenta
-    //else: No tiene saldo suficiente para pagar este servicio.
-
-
-
 
 function pagarServicio()
 {
@@ -344,45 +238,9 @@ function pagarServicio()
         var servicioAPagar = prompt("Por favor, ingrese el número que corresponda al servicio que desea pagar: \n1-Teléfono \n2-Luz \n3-Internet \n4- Agua");
         if(servicioAPagar === null) {return}
         servicioAPagar = parseInt(servicioAPagar);
-        
- 
-  /*      while(!datosValidos)
-        {
-            if (!isNaN(servicioAPagar))
-            {
-                if (servicioAPagar < saldoCuenta)
-                {
-                    datosValidos = true;
-                }
-                else
-                {
-                    alert("No tiene saldo suficiente para pagar este servicio.")
-                    if(servicioAPagar === null) {return}
-                 }
-            }    
-            else
-            {
-                servicioAPagar = prompt("Ha ingresado un elemento inválido. Por favor, ingrese únicamente el número correspondiente al servicio a pagar: \n1-Teléfono \n2-Luz \n3-Internet \n4- Agua")
-                if(servicioAPagar === null) {return}
-            }
-        }*/
-
- //       servicioAPagar = parseInt(servicioAPagar);
- //       actualizarSaldoEnPantalla();
-        /*saldoAnterior = saldoCuenta;
-        restarDinero(dineroExtraido);
-       
-        alert("Ha extraido: $" + dineroExtraido + "." + "\nSu saldo anterior: $" + saldoAnterior + "." + "\nSu saldo actual: $" + saldoCuenta + ".");  */
-        
-        
-        //validaciones
-        //si servicio es mayor a saldoCuenta
-
-        //si confirmacion es igual a true
+   
         while (true)
         {
-            //var datosValidos = false;
-            
             switch(servicioAPagar)
             {
                 case 1:
@@ -401,29 +259,7 @@ function pagarServicio()
                         alert("El pago se ha realizado correctamente.\nSaldo anterior: $" + saldoAnterior + "\nDinero descontado: $" + telefono + "\nSaldo actual: $" + saldoCuenta);
                         return;
                     }
-                    
-                            
-                   /* if(telefono > saldoCuenta)
-                    {
-                        noSaldoDisponible();
-                        return;
-                    }
-
-                    var confirmacion = confirm("Ud debe $" + telefono + " de teléfono. ¿Desea concretar el pago?"); 
-                    if(confirmacion === true)
-                    {                                                              
-                        saldoAnterior = saldoCuenta;                    
-                        restarDinero(telefono);
-                        actualizarSaldoEnPantalla();
-                        alert("El pago se ha realizado correctamente.\nSu saldo anterior: $" + saldoAnterior + "\nDinero descontado: $" + telefono + "\nSu saldo actual: $" + saldoCuenta);
-                        return;
-                    }
-                    else
-                    {
-                        falseConfirmacion();
-                        return;
-                    }*/
-                   
+              
                 case 2:
                     if(luz > saldoCuenta)
                     {
@@ -442,29 +278,7 @@ function pagarServicio()
 
                     
                     }
-                    
-                    /*if(luz > saldoCuenta)
-                    {
-                        noSaldoDisponible();
-                        return;
-                    }
-
-                    var confirmacion = confirm("Ud debe $" + luz + " de teléfono. ¿Desea concretar el pago?");
-                    
-                    if(confirmacion === true)
-                    {                     
-                        saldoAnterior = saldoCuenta;
-                        restarDinero(luz);
-                        actualizarSaldoEnPantalla();
-                        alert("El pago se ha realizado correctamente.\nSu saldo anterior: $" + saldoAnterior + "\nDinero descontado: $" + luz + "\nSu saldo actual: $" + saldoCuenta);
-                        return;
-                        
-                    }
-                    else
-                    {
-                        falseConfirmacion();
-                        return;
-                    }*/
+                  
                 case 3:
                      
                     if(internet > saldoCuenta)
@@ -519,17 +333,6 @@ function pagarServicio()
         alert("Su cuenta está bloqueada. No puede realizar operaciones.");
     }
 }
-
-
-
-
-
-
-
-
-
-
-
 
 function transferirDinero() {
     if (autorizado)

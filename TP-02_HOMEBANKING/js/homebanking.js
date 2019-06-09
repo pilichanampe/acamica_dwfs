@@ -5,13 +5,13 @@ var limiteExtraccion = 2000;
 var password = 1234;
 var autorizado = false;
 
-
-
-
 var agua = 350;
 var telefono = 425;
 var luz = 210;
 var internet = 570;
+
+var cuentaAmiga1 = 1234567;
+var cuentaAmiga2 = 7654321;
 
 //Ejecución de las funciones que actualizan los valores de las variables en el HTML.
 window.onload = function() {
@@ -343,7 +343,10 @@ function pagarServicio()
     {
         var servicioAPagar = prompt("Por favor, ingrese el número que corresponda al servicio que desea pagar: \n1-Teléfono \n2-Luz \n3-Internet \n4- Agua");
         if(servicioAPagar === null) {return}
-        while(!datosValidos)
+        servicioAPagar = parseInt(servicioAPagar);
+        
+ 
+  /*      while(!datosValidos)
         {
             if (!isNaN(servicioAPagar))
             {
@@ -362,10 +365,10 @@ function pagarServicio()
                 servicioAPagar = prompt("Ha ingresado un elemento inválido. Por favor, ingrese únicamente el número correspondiente al servicio a pagar: \n1-Teléfono \n2-Luz \n3-Internet \n4- Agua")
                 if(servicioAPagar === null) {return}
             }
-        }
+        }*/
 
-        servicioAPagar = parseInt(servicioAPagar);
-        actualizarSaldoEnPantalla();
+ //       servicioAPagar = parseInt(servicioAPagar);
+ //       actualizarSaldoEnPantalla();
         /*saldoAnterior = saldoCuenta;
         restarDinero(dineroExtraido);
        
@@ -385,22 +388,18 @@ function pagarServicio()
                 case 1:
                     if(telefono > saldoCuenta)
                     {
-                        alert("No tiene saldo suficiente para pagar este servicio.")
+                        alert("No tiene saldo suficiente para pagar el servicio de teléfono. \nSu deuda es de $" + telefono + " y solamente tiene $" +saldoCuenta+ " en su cuenta");
                         return;
                     }
                     else
                     {
                         var confirmPagar = confirm("Ud debe $" + telefono + " de teléfono. ¿Desea concretar el pago?"); 
                         if(confirmPagar === false){return}
-                        {                                                              
-                            saldoAnterior = saldoCuenta;                    
-                            restarDinero(telefono);
-                            actualizarSaldoEnPantalla();
-                            alert("El pago se ha realizado correctamente.\nSaldo anterior: $" + saldoAnterior + "\nDinero descontado: $" + telefono + "\nSaldo actual: $" + saldoCuenta);
-                            return;
-                        }
-
-                    
+                        saldoAnterior = saldoCuenta;                    
+                        restarDinero(telefono);
+                        actualizarSaldoEnPantalla();
+                        alert("El pago se ha realizado correctamente.\nSaldo anterior: $" + saldoAnterior + "\nDinero descontado: $" + telefono + "\nSaldo actual: $" + saldoCuenta);
+                        return;
                     }
                     
                             
@@ -428,20 +427,18 @@ function pagarServicio()
                 case 2:
                     if(luz > saldoCuenta)
                     {
-                        alert("No tiene saldo suficiente para pagar este servicio.")
+                        alert("No tiene saldo suficiente para pagar el servicio de teléfono. \nSu deuda es de $" + luz + " y solamente tiene $" +saldoCuenta+ " en su cuenta");
                         return;
                     }
                     else
                     {
                         var confirmPagar = confirm("Ud debe $" + luz + " de luz. ¿Desea concretar el pago?"); 
                         if(confirmPagar === false){return}
-                        {                                                              
-                            saldoAnterior = saldoCuenta;                    
-                            restarDinero(luz);
-                            actualizarSaldoEnPantalla();
-                            alert("El pago se ha realizado correctamente.\nSaldo anterior: $" + saldoAnterior + "\nDinero descontado: $" + luz + "\nSaldo actual: $" + saldoCuenta);
-                            return;
-                        }
+                        saldoAnterior = saldoCuenta;                    
+                        restarDinero(luz);
+                        actualizarSaldoEnPantalla();
+                        alert("El pago se ha realizado correctamente.\nSaldo anterior: $" + saldoAnterior + "\nDinero descontado: $" + luz + "\nSaldo actual: $" + saldoCuenta);
+                        return;
 
                     
                     }
@@ -472,20 +469,18 @@ function pagarServicio()
                      
                     if(internet > saldoCuenta)
                     {
-                        alert("No tiene saldo suficiente para pagar este servicio.")
+                        alert("No tiene saldo suficiente para pagar el servicio de teléfono. \nSu deuda es de $" + internet + " y solamente tiene $" +saldoCuenta+ " en su cuenta");
                         return;
                     }
                     else
                     {
                         var confirmPagar = confirm("Ud debe $" + internet + " de internet. ¿Desea concretar el pago?"); 
                         if(confirmPagar === false){return}
-                        {                                                              
-                            saldoAnterior = saldoCuenta;                    
-                            restarDinero(internet);
-                            actualizarSaldoEnPantalla();
-                            alert("El pago se ha realizado correctamente.\nSaldo anterior: $" + saldoAnterior + "\nDinero descontado: $" + internet + "\nSaldo actual: $" + saldoCuenta);
-                            return;
-                        }
+                        saldoAnterior = saldoCuenta;                    
+                        restarDinero(internet);
+                        actualizarSaldoEnPantalla();
+                        alert("El pago se ha realizado correctamente.\nSaldo anterior: $" + saldoAnterior + "\nDinero descontado: $" + internet + "\nSaldo actual: $" + saldoCuenta);
+                        return;
 
                     
                     }
@@ -494,30 +489,29 @@ function pagarServicio()
 
                     if(agua > saldoCuenta)
                     {
-                        alert("No tiene saldo suficiente para pagar este servicio.")
+                        alert("No tiene saldo suficiente para pagar el servicio de teléfono. \nSu deuda es de $" + agua + " y solamente tiene $" +saldoCuenta+ " en su cuenta");
                         return;
                     }
                     else
                     {
                         var confirmPagar = confirm("Ud debe $" + agua + " de agua. ¿Desea concretar el pago?"); 
                         if(confirmPagar === false){return}
-                        {                                                              
-                            saldoAnterior = saldoCuenta;                    
-                            restarDinero(agua);
-                            actualizarSaldoEnPantalla();
-                            alert("El pago se ha realizado correctamente.\nSaldo anterior: $" + saldoAnterior + "\nDinero descontado: $" + agua + "\nSaldo actual: $" + saldoCuenta);
-                            return;
-                        }
-
+                        saldoAnterior = saldoCuenta;                    
+                        restarDinero(agua);
+                        actualizarSaldoEnPantalla();
+                        alert("El pago se ha realizado correctamente.\nSaldo anterior: $" + saldoAnterior + "\nDinero descontado: $" + agua + "\nSaldo actual: $" + saldoCuenta);
+                        return;
                     
                     }
                 default:
                     {
                         alert("No existe el servicio seleccionado.");
+                        servicioAPagar = prompt("Por favor, ingrese el número que corresponda al servicio que desea pagar: \n1-Teléfono \n2-Luz \n3-Internet \n4- Agua");
+                        if(servicioAPagar === null) {return}
+                        servicioAPagar = parseInt(servicioAPagar);
                     }
                     
             }
-            break;
         }
     }
     else

@@ -7,11 +7,11 @@ var autorizado = false;
 var confirmacion = true;
 
 
+
 var agua = 350;
 var telefono = 425;
 var luz = 210;
 var internet = 570;
-
 
 //Ejecución de las funciones que actualizan los valores de las variables en el HTML.
 window.onload = function() {
@@ -35,7 +35,7 @@ function restarDinero(cantDinero)
     saldoCuenta = saldoCuenta - cantDinero;
 }
 
-function cambiarLimiteDeExtraccion() {
+/*function cambiarLimiteDeExtraccion() {
     if (autorizado)
     {
         nuevoLimiteExtraccion = prompt("Por favor, ingrese su nuevo límite de extracción:");
@@ -46,8 +46,7 @@ function cambiarLimiteDeExtraccion() {
              nuevoLimiteExtraccion = prompt("Solo podrán extraerse billetes de $100, por lo que su límite debe ser múltiplo de 100. Por favor, ingrese su nuevo límite de extracción (múltiplo de 100):");
              if(nuevoLimiteExtraccion === null) {return}
         }
-
-        limiteExtraccion = parseInt(nuevoLimiteExtraccion);
+        
         actualizarLimiteEnPantalla();
 
         alert("Su nuevo límite de extracción es: $" + limiteExtraccion);
@@ -58,7 +57,100 @@ function cambiarLimiteDeExtraccion() {
     }
 
 
+}*/
+
+//validaciones:
+        //*****/si nuevoLimiteExtraccion es un numero 
+            //else: Ha ingresado un elemento inválido. Por favor, utilice números para ingresar su nuevo límite de extracción: 
+
+        //******* */si nuevoLimiteExtraccion es menor o igual que maximoLimiteExtraccion
+            //else: Por seguridad, su límite de extracción no puede exceder a los $12000. Por favor, ingrese un monto igual o menor al máximo permitido:
+
+        //***** */si nuevoLimiteExtraccion es multiplo de 100
+            //else: Solo podrán extraerse billetes de $100, por lo que su límite debe ser múltiplo de 100. Por favor, ingrese su nuevo límite de extracción (múltiplo de 100):
+
+        //si nuevoLimiteExtraccion es mayor que 0
+            //else: No pueden ingresarse montos negativos.
+        
+        //limiteExtraccion = parseInt(nuevoLimiteExtraccion);
+
+
+
+function cambiarLimiteDeExtraccion()
+{
+    var datosValidos = false;
+    var maxLimiteExtraccion = 12000;
+
+    if (autorizado)
+    {
+        
+        var nuevoLimiteExtraccion = prompt("Por favor, ingrese su nuevo límite de extracción: ");
+        if(nuevoLimiteExtraccion === null) {return}
+        while(!datosValidos)
+        {
+            if (!isNaN(nuevoLimiteExtraccion))
+            {
+                if (nuevoLimiteExtraccion <= maxLimiteExtraccion)
+                {
+                    if (nuevoLimiteExtraccion % 100 == 0)
+                   {
+                       if (nuevoLimiteExtraccion > 0)
+                       {
+                           datosValidos = true;
+                       }
+                       else
+                       {
+                           alert("No pueden ingresarse montos negativos o iguales a cero.")
+                           nuevoLimiteExtraccion = prompt("Por favor, ingrese una cantidad de extracción mayor a cero:");
+                           if(nuevoLimiteExtraccion === null) {return}
+                       }
+                   }
+                   else
+                   {
+                       alert("Solo pueden extraerse billetes de $100.")
+                       nuevoLimiteExtraccion = prompt("Por favor, ingrese su nuevo límite de extracción (múltiplo de 100):");
+                       if(nuevoLimiteExtraccion === null) {return}
+                   }
+            
+                }
+                else
+                {
+                    alert("Por seguridad, su límite de extracción no puede exceder los $12000.")
+                    nuevoLimiteExtraccion = prompt("Por favor, ingrese un monto igual o menor al máximo permitido:");
+                    if(nuevoLimiteExtraccion === null) {return}
+                }
+            }
+            else
+            {
+                nuevoLimiteExtraccion = prompt("Ha ingresado un elemento inválido. Por favor, utilice únicamente números para actualizar su nuevo límite de extracción: ")
+                if(nuevoLimiteExtraccion === null) {return}
+            }
+        }
+
+
+        nuevoLimiteExtraccion = parseInt(nuevoLimiteExtraccion);
+        limiteExtraccion = nuevoLimiteExtraccion;
+        actualizarLimiteEnPantalla();
+        alert("Su nuevo límite de extracción es: $" + limiteExtraccion + ".");  
+    }
+    else
+    {
+        alert("Su cuenta está bloqueada. No puede realizar operaciones.");
+    }
+      
+
 }
+
+
+
+
+
+
+
+
+
+
+
 
 function extraerDinero()
 {
@@ -122,7 +214,7 @@ function extraerDinero()
         saldoAnterior = saldoCuenta;
         restarDinero(dineroExtraido);
         actualizarSaldoEnPantalla();
-        alert("Ha extraido: $" + dineroExtraido + "\nSu saldo anterior: $" + saldoAnterior + "\nSu saldo actual: $" + saldoCuenta);  
+        alert("Ha extraido: $" + dineroExtraido + "." + "\nSu saldo anterior: $" + saldoAnterior + "." + "\nSu saldo actual: $" + saldoCuenta + ".");  
     }
     else
     {

@@ -364,7 +364,7 @@ function iniciarSesion()
         {
             if (ingreseSuPassword !== password)
             {
-                ingreseSuPassword = prompt("Su contraseña es incorrecta. Por favor, ingresela nuevamente: ");
+                ingreseSuPassword = prompt("Su contraseña es incorrecta. Por favor, ingrésela nuevamente:");
                 ingreseSuPassword = parseInt(ingreseSuPassword);
             }
             else 
@@ -377,11 +377,17 @@ function iniciarSesion()
 
         if (i === 3)
         {
+            if (ingreseSuPassword !== password)
+            {
             alert("Por su seguridad, su dinero ha sido retenido. Por favor, diríjase a la sucursal más cercana.");
             saldoCuenta = 0;
+            }
+            else
+            {
+                autorizado = true;
+                alert("Bienvenido/a, " + nombreUsuario);
+            }
         }
-    
-        
     }
 }
 

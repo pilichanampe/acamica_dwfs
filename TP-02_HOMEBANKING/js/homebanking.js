@@ -26,8 +26,6 @@ window.onload = function() {
 function sumarDinero(cantDinero)
 {
     saldoCuenta = cantDinero + saldoCuenta;
-
-    
 }
 
 function restarDinero(cantDinero)
@@ -42,7 +40,6 @@ function cambiarLimiteDeExtraccion()
 
     if (autorizado)
     {
-        
         var nuevoLimiteExtraccion = prompt("Por favor, ingrese su nuevo límite de extracción: ");
         if(nuevoLimiteExtraccion === null) {return}
         while(!datosValidos)
@@ -59,29 +56,28 @@ function cambiarLimiteDeExtraccion()
                        }
                        else
                        {
-                           alert("No pueden ingresarse montos negativos o iguales a 0.")
+                           alert("No pueden ingresarse montos negativos o iguales a 0.");
                            nuevoLimiteExtraccion = prompt("Por favor, ingrese una cantidad de extracción mayor a 0:");
                            if(nuevoLimiteExtraccion === null) {return}
                        }
                    }
                    else
                    {
-                       alert("Solo pueden extraerse billetes de $100, por ende su límite de extracción debe ser múltiplo de 100.")
+                       alert("Solo pueden extraerse billetes de $100, por ende su límite de extracción debe ser múltiplo de 100.");
                        nuevoLimiteExtraccion = prompt("Por favor, ingrese su nuevo límite de extracción (múltiplo de 100):");
                        if(nuevoLimiteExtraccion === null) {return}
                    }
             
                 }
                 else
-                {
-                    alert("Por seguridad, su límite de extracción no puede exceder los $12000.")
-                    nuevoLimiteExtraccion = prompt("Por favor, ingrese un monto igual o menor al máximo permitido:");
+                {   
+                    nuevoLimiteExtraccion = prompt("Por seguridad, su límite de extracción no puede exceder los $12000. \nPor favor, ingrese un monto igual o menor al máximo permitido:");
                     if(nuevoLimiteExtraccion === null) {return}
                 }
             }
             else
             {
-                nuevoLimiteExtraccion = prompt("Ha ingresado un elemento inválido. Por favor, utilice únicamente números para actualizar su nuevo límite de extracción: ")
+                nuevoLimiteExtraccion = prompt("Ha ingresado un elemento inválido. Por favor, utilice únicamente números para actualizar su nuevo límite de extracción: ");
                 if(nuevoLimiteExtraccion === null) {return}
             }
         }
@@ -124,35 +120,35 @@ function extraerDinero()
                             }
                             else
                             {
-                                alert("No pueden ingresarse montos negativos o iguales a 0.")
+                                alert("No pueden ingresarse montos negativos o iguales a 0.");
                                 dineroExtraido = prompt("Por favor, ingrese una cantidad de extracción mayor a 0:");
                                 if(dineroExtraido === null) {return}
                             }
                         }
                         else
                         {
-                            alert("Solo pueden extraerse billetes de $100.")
+                            alert("Solo pueden extraerse billetes de $100.");
                             dineroExtraido = prompt("Por favor, ingrese una cantidad de extracción que sea múltiplo de 100:");
                             if(dineroExtraido === null) {return}
                         }
                     }
                     else
                     {
-                        alert("La cantidad de dinero que desea extraer excede el saldo de su cuenta.")
+                        alert("La cantidad de dinero que desea extraer excede el saldo de su cuenta.");
                         dineroExtraido = prompt("Por favor, ingrese una cantidad de extracción que sea menor o igual a su saldo actual:");
                         if(dineroExtraido === null) {return}
                     }
                 }
                 else
                 {
-                    alert("La cantidad de dinero que desea extraer excede su límite de extracción.")
+                    alert("La cantidad de dinero que desea extraer excede su límite de extracción.");
                     dineroExtraido = prompt("Por favor, ingrese una cantidad de extracción que sea menor o igual a su límite:");
                     if(dineroExtraido === null) {return}
                 }
             }
             else
             {
-                dineroExtraido = prompt("Ha ingresado un elemento inválido. Por favor, ingrese la cantidad numerica que desea extraer: ")
+                dineroExtraido = prompt("Ha ingresado un elemento inválido. Por favor, ingrese la cantidad numerica que desea extraer: ");
                 if(dineroExtraido === null) {return}
             }
         }
@@ -162,7 +158,7 @@ function extraerDinero()
         saldoAnterior = saldoCuenta;
         restarDinero(dineroExtraido);
         actualizarSaldoEnPantalla();
-        alert("Ha extraido: $" + dineroExtraido + "." + "\nSu saldo anterior: $" + saldoAnterior + "." + "\nSu saldo actual: $" + saldoCuenta + ".");  
+        alert("Ud ha extraido: $" + dineroExtraido + "." + "\nSaldo anterior: $" + saldoAnterior + "." + "\nSaldo actual: $" + saldoCuenta + ".");  
     }
     else
     {
@@ -208,7 +204,7 @@ function depositarDinero()
             }
             else
             {
-                dineroADepositar = prompt("Ha ingresado un elemento inválido. Por favor, ingrese únicamente números para su depósito: ")
+                dineroADepositar = prompt("Ha ingresado un elemento inválido. Por favor, ingrese únicamente números para su depósito: ");
                 if(dineroADepositar === null) {return}
             }
         }
@@ -230,7 +226,7 @@ function depositarDinero()
 
 function pagarServicio()
 {
-    var datosValidos = false;
+   /// var datosValidos = false;
     var confirmPagar = true;
 
     if (autorizado)
@@ -252,7 +248,11 @@ function pagarServicio()
                     else
                     {
                         var confirmPagar = confirm("Ud debe $" + telefono + " de teléfono. ¿Desea concretar el pago?"); 
-                        if(confirmPagar === false){return}
+                        if(confirmPagar === false)
+                        {
+                            alert("Su pago ha sido cancelado.");
+                            return;
+                        }
                         saldoAnterior = saldoCuenta;                    
                         restarDinero(telefono);
                         actualizarSaldoEnPantalla();
@@ -269,14 +269,16 @@ function pagarServicio()
                     else
                     {
                         var confirmPagar = confirm("Ud debe $" + luz + " de luz. ¿Desea concretar el pago?"); 
-                        if(confirmPagar === false){return}
+                        if(confirmPagar === false)
+                        {
+                            alert("Su pago ha sido cancelado.");
+                            return;
+                        }
                         saldoAnterior = saldoCuenta;                    
                         restarDinero(luz);
                         actualizarSaldoEnPantalla();
                         alert("El pago se ha realizado correctamente.\nSaldo anterior: $" + saldoAnterior + "\nDinero descontado: $" + luz + "\nSaldo actual: $" + saldoCuenta);
                         return;
-
-                    
                     }
                   
                 case 3:
@@ -289,14 +291,16 @@ function pagarServicio()
                     else
                     {
                         var confirmPagar = confirm("Ud debe $" + internet + " de internet. ¿Desea concretar el pago?"); 
-                        if(confirmPagar === false){return}
+                        if(confirmPagar === false)
+                        {
+                            alert("Su pago ha sido cancelado.");
+                            return;
+                        }
                         saldoAnterior = saldoCuenta;                    
                         restarDinero(internet);
                         actualizarSaldoEnPantalla();
                         alert("El pago se ha realizado correctamente.\nSaldo anterior: $" + saldoAnterior + "\nDinero descontado: $" + internet + "\nSaldo actual: $" + saldoCuenta);
                         return;
-
-                    
                     }
 
                 case 4:
@@ -309,22 +313,23 @@ function pagarServicio()
                     else
                     {
                         var confirmPagar = confirm("Ud debe $" + agua + " de agua. ¿Desea concretar el pago?"); 
-                        if(confirmPagar === false){return}
+                        if(confirmPagar === false)
+                        {
+                            alert("Su pago ha sido cancelado.");
+                            return;
+                        }
                         saldoAnterior = saldoCuenta;                    
                         restarDinero(agua);
                         actualizarSaldoEnPantalla();
                         alert("El pago se ha realizado correctamente.\nSaldo anterior: $" + saldoAnterior + "\nDinero descontado: $" + agua + "\nSaldo actual: $" + saldoCuenta);
                         return;
-                    
                     }
-                default:
+                    default:
                     {
-                        alert("No existe el servicio seleccionado.");
-                        servicioAPagar = prompt("Por favor, ingrese el número que corresponda al servicio que desea pagar: \n1-Teléfono \n2-Luz \n3-Internet \n4- Agua");
+                        servicioAPagar = prompt("No existe el servicio seleccionado. \nPor favor, ingrese el número que corresponda un servicio existente: \n1-Teléfono \n2-Luz \n3-Internet \n4- Agua");
                         if(servicioAPagar === null) {return}
                         servicioAPagar = parseInt(servicioAPagar);
-                    }
-                    
+                    }       
             }
         }
     }
@@ -333,24 +338,91 @@ function pagarServicio()
         alert("Su cuenta está bloqueada. No puede realizar operaciones.");
     }
 }
+//validaciones
+    //si la cantDinero es menor o igual a saldoCuenta
+        //else: La cantidad de dinero que desea transferir
+function transferirDinero() 
+{
+    var datosValidos = false;
 
-function transferirDinero() {
     if (autorizado)
     {
+        var dineroATrans = prompt("Por favor, ingrese la cantidad de dinero que desea transferir: ");
+        if(dineroATrans === null) {return}
+        dineroATrans = parseInt(dineroATrans);
+        while(!datosValidos)
+        {
+            if (!isNaN(dineroATrans))
+            {
+                if (dineroATrans <= saldoCuenta)
+                {
+                    datosValidos = true;
+                    cuentaATrans = parseInt(prompt("Por favor, ingrese el número de la cuenta amiga a la que desea transferir el monto de: $" + dineroATrans + "."));
 
-    }
+                    while(true)
+                    {
+                        switch (cuentaATrans)
+                        {
+                            case cuentaAmiga1:
+                            confirmTrans = confirm("Dinero a transferir: $" + dineroATrans + "\nCuenta amiga: " + cuentaAmiga1 + "\n¿Desea concretar la operación?");
+                            if(confirmTrans === false) 
+                            {
+                                alert("Su operación ha sido cancelada.");
+                                return;
+                            }
+
+                            saldoAnterior = saldoCuenta;
+                            restarDinero(dineroATrans);
+                            actualizarSaldoEnPantalla();
+                            alert("La transferencia se ha realizado exitosamente. \nSaldo actual: $" + saldoCuenta + "."); 
+                            return;
+                       
+                        case cuentaAmiga2:
+                            confirmTrans = confirm("Dinero a transferir: $" + dineroATrans + "\nCuenta amiga: " + cuentaAmiga2 + "\n¿Desea concretar la operación?");
+                            if(confirmTrans === false) 
+                            {
+                                alert("Su operación ha sido cancelada.");
+                                return;
+                            }
+                            
+                            saldoAnterior = saldoCuenta;
+                            restarDinero(dineroATrans);
+                            actualizarSaldoEnPantalla();
+                            alert("La transferencia se ha realizado exitosamente. \nSaldo actual: $" + saldoCuenta + "."); 
+                            return;
+
+                        default:
+                            cuentaATrans = prompt("El número de la cuenta ingresado no corresponde con una cuenta amiga. Por favor, ingrese el número de una cuenta amiga para poder transferir:");
+                            if(cuentaATrans === null) {return};
+                            cuentaATrans = parseInt(cuentaATrans)
+                        }
+                    }                
+                }
+                else
+                {
+                    alert("La cantidad de dinero que desea transferir excede el saldo de su cuenta.");
+                    return;
+                }
+            }
+            else
+            {
+                dineroATrans = prompt("Ha ingresado un elemento inválido. Por favor, ingrese la cantidad numérica que desea transferir: ");
+                if(dineroATrans === null) {return}
+            }
+        }
+
+
+    }    
     else
     {
         alert("Su cuenta está bloqueada. No puede realizar operaciones.");
     }
-
 }
 
 function iniciarSesion() 
 {
-   var ingreseSuPassword = prompt("Por favor, ingrese su contraseña: ")
-   ingreseSuPassword = parseInt(ingreseSuPassword)
-
+   var ingreseSuPassword = prompt("Por favor, ingrese su contraseña: ");
+   ingreseSuPassword = parseInt(ingreseSuPassword);
 
     if (ingreseSuPassword === password)
     {

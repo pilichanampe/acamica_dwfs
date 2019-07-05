@@ -16,7 +16,7 @@ body {
 
 .logo {
     display: inline-block;
-    width: 200px;
+    width: 300px;
     height: 50px;
 
     text-align: left;
@@ -120,7 +120,7 @@ body {
 
     text-align: center;
 
-    color: #fddb82;
+    color: #f7e69a;
     border-radius: 8px;
     background-color: #606161;
 

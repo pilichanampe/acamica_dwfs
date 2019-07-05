@@ -158,7 +158,9 @@ function extraerDinero()
         saldoAnterior = saldoCuenta;
         restarDinero(dineroExtraido);
         actualizarSaldoEnPantalla();
-        alert("Ud ha extraido: $" + dineroExtraido + "." + "\nSaldo anterior: $" + saldoAnterior + "." + "\nSaldo actual: $" + saldoCuenta + ".");  
+        alert("Ud ha extraido: $" + dineroExtraido + "." + "\nSaldo anterior: $" + saldoAnterior + "." + "\nSaldo actual: $" + saldoCuenta + ".");
+        alert("¿¿Que cómo mi HomeBanking permite extraer dinero?? Maaagia Deadpool. Si yo rompo la cuarta pared, mi HomeBanking rompe las leyes de la física.");
+        alert("¿¿Que dónde está la plata que acabas de extraer?? Ahhp! Digamos que hoy he recibido una hermosa donación para comprar chimichangas.")
     }
     else
     {
@@ -188,7 +190,7 @@ function depositarDinero()
                     }
                     else
                     {
-                        alert("No pueden ingresarse montos negativos o iguales a 0.")
+                        alert("Seriously?? No pueden ingresarse montos negativos o iguales a 0. Dahh!")
                         dineroADepositar = prompt("Por favor, ingrese un valor de depósito mayor a 0:");
                         if(dineroADepositar === null) {return}
                     }
@@ -215,7 +217,7 @@ function depositarDinero()
         sumarDinero(dineroADepositar);
         actualizarSaldoEnPantalla();
         alert("Ud ha depositado: $" + dineroADepositar + "." + "\nSaldo anterior: $" + saldoAnterior + "." + "\nSaldo actual: $" + saldoCuenta + ".");
-        alert("Ahora es un poco menos pobre :). Gracias por utilizar los servicios de Home Deadpool Banking.");
+        alert("¡¡Por fin alguien le da de comer a esta cuenta!! \nEsas chimichangas no se compran solas, youknow...");
     }
     else
     {

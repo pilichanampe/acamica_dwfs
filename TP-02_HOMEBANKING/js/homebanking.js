@@ -214,7 +214,8 @@ function depositarDinero()
         saldoAnterior = saldoCuenta;
         sumarDinero(dineroADepositar);
         actualizarSaldoEnPantalla();
-        alert("Ud ha depositado: $" + dineroADepositar + "." + "\nSaldo anterior: $" + saldoAnterior + "." + "\nSaldo actual: $" + saldoCuenta + ".");  
+        alert("Ud ha depositado: $" + dineroADepositar + "." + "\nSaldo anterior: $" + saldoAnterior + "." + "\nSaldo actual: $" + saldoCuenta + ".");
+        alert("Ahora es un poco menos pobre :). Gracias por utilizar los servicios de Home Deadpool Banking.");
     }
     else
     {

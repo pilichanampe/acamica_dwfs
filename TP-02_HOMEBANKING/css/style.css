@@ -39,8 +39,8 @@ body {
     font-size: 32px;
     font-weight: normal;
 
-    color: #2a333d;
-    border-left: 6px solid #2cc197;
+    color: #5a0e0b;
+    border-left: 6px solid #606161;
 }
 
 .header {
@@ -66,7 +66,7 @@ body {
 
     text-overflow: ellipsis;
 
-    color: #fff;
+    color: #fddb82;
 }
 
 .links {
@@ -88,7 +88,7 @@ body {
     text-align: left;
     vertical-align: text-bottom;
 
-    color: #666;
+    color: #5a0e0b;
     border: 0;
     background-color: transparent;
 }
@@ -96,7 +96,7 @@ body {
 .links:hover {
     margin-left: 10px;
 
-    color: #2cc197;
+    color: #d83826;
 }
 
 .white-container {
@@ -108,7 +108,7 @@ body {
 
     border: 1px solid #979797;
     border-radius: 8px;
-    background-color: #fff;
+    background-color: #fffcee;
 
     justify-content: center;
 }
@@ -120,9 +120,9 @@ body {
 
     text-align: center;
 
-    color: white;
+    color: #fddb82;
     border-radius: 8px;
-    background-color: #2cc197;
+    background-color: #606161;
 
     align-items: center;
 }

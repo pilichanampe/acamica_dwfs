@@ -37,8 +37,16 @@ li::before {
 
 .col-60 {
   background: #E84A5F;
-
+  width: 600px;
+  height: 600px;
+  
 }
+
+.piezas {
+  width: 11.1%;
+  height: 11.1%;
+}
+
 
 #flecha{
   font-size: 60px;
@@ -51,7 +59,9 @@ li::before {
 #juego div {
   text-align: center;
   animation: fadein 2s;
+
 }
+
 
 @keyframes fadein {
   from { opacity: 0; }

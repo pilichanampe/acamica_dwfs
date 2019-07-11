@@ -1,4 +1,5 @@
 /*Código armado por La Foca Loca S.A. No modificar*/
+/*Lo sorry, La Foca Loca S.A., lo modifiqué. You've been Deadpool-ized.*/
 body {
   font-family: Arial, sans-serif;
   width: 1200px;
@@ -55,6 +56,7 @@ li::before {
   width: 33%;
   height: 33%;
   border: 0.98px solid #adab8e;
+}
   
   #flecha {
   font-size: 60px;
@@ -76,6 +78,10 @@ li::before {
 
 }
 
+#objetivo img {
+  width: 70%;
+  height: 70%;
+}
 
 @keyframes fadein {
   from { opacity: 0; }

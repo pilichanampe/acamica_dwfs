@@ -70,7 +70,32 @@ colorPersonalizado.addEventListener('change',
   })
 );
 
-grillaPixeles.addEventListener("mousedown", pintarApretando);
+
+var pintando =  true;
+grillaPixeles.addEventListener("mousedown", pintaClick);
+grillaPixeles.addEventListener("mouseover", pintaMoviendo)
+grillaPixeles.addEventListener("mouseup", noPinta);
+
+
+
+function pintaClick(e) {
+  e.target.style.backgroundColor = pintar(e);
+  pintando = grillaPixeles.addEventListener("mouseover", pintaMoviendo);
+}
+function pintaMoviendo(e) {
+  e.target.style.backgroundColor = pintar(e);
+  pintando = grillaPixeles.addEventListener("mousedown", pintaClick);
+}
+
+function noPinta(e) {
+  pintando = grillaPixeles.removeEventListener("mouseover", pintaMoviendo);
+} 
+
+
+ 
+
+
+/*grillaPixeles.addEventListener("mousedown", pintarApretando);
 grillaPixeles.addEventListener("mouseup", dejarPintar);
 //grillaPixeles.addEventListener("mouseover", arrastrarPintar)
 
@@ -94,7 +119,7 @@ function noArrastrarPintar(e) {
 }
   
   //return false;
-
+*/
 
 
 mostrarPaletaColores();

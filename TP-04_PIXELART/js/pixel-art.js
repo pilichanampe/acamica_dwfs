@@ -24,11 +24,38 @@ var paleta = document.getElementById("paleta");
 var grillaPixeles = document.getElementById("grilla-pixeles");
 
 function mostrarPaletaColores() {
-  for(i = 0; i < nombreColores.length; i++) {
+  for(var i = 0; i < nombreColores.length; i++) {
+    var color = document.createElement("div");
+    color.className = "color-paleta";
+    color.style.backgroundColor = nombreColores[i];
+    paleta.appendChild(color);
 
   }
 }
 
+function mostrarGrilla() {
+  for(var i = 0; i < 1750; i++) {
+    var pixel = document.createElement("div");
+    grillaPixeles.appendChild(pixel);
+  }
+}
+
+var selecColor = document.getElementById("indicador-de-color");
+paleta.addEventListener("click", mostrarColor);
+
+function mostrarColor(e) {
+  selecColor.style.backgroundColor = e.target.style.backgroundColor;
+}
+
+
+
+//pintar en Grilla
+//grillaPixeles.addEventListener("click", pintar);
+
+function pintar(e) {
+  e.target.style.backgroundColor = selecColor.style.backgroundColor;
+
+}
 
 // Variable para guardar el elemento 'color-personalizado'
 // Es decir, el que se elige con la rueda de color.
@@ -39,7 +66,36 @@ colorPersonalizado.addEventListener('change',
     // Se guarda el color de la rueda en colorActual
     colorActual = colorPersonalizado.value;
     // Completar para que cambie el indicador-de-color al colorActual
-
-
+    selecColor.style.backgroundColor = colorActual;
   })
 );
+
+grillaPixeles.addEventListener("mousedown", pintarApretando);
+grillaPixeles.addEventListener("mouseup", dejarPintar);
+//grillaPixeles.addEventListener("mouseover", arrastrarPintar)
+
+function pintarApretando(e) {
+  e.target.style.backgroundColor = pintar(e);
+  grillaPixeles.addEventListener("mouseover", arrastrarPintar)
+}
+
+function dejarPintar() {
+  grillaPixeles.removeEventListener("mouseover", arrastrarPintar);
+
+
+}
+
+function arrastrarPintar(e) {
+  e.target.style.backgroundColor = pintar(e);
+}
+
+function noArrastrarPintar(e) {
+  e.target.style.backgroundColor = e.target.style.backgroundColor;
+}
+  
+  //return false;
+
+
+
+mostrarPaletaColores();
+mostrarGrilla();

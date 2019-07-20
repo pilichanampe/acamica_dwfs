@@ -19,4 +19,4 @@ function cargarSuperheroe(superheroe) {
   for (var i = 0; i < superheroe.length; i++) {
     $pixeles[i].style.backgroundColor = superheroe[i];
   }
-}
+} 

@@ -33,12 +33,16 @@ function mostrarPaletaColores() {
   }
 }
 
+mostrarPaletaColores();
+
 function mostrarGrilla() {
   for(var i = 0; i < 1750; i++) {
     var pixel = document.createElement("div");
     grillaPixeles.appendChild(pixel);
   }
 }
+
+mostrarGrilla();
 
 var selecColor = document.getElementById("indicador-de-color");
 paleta.addEventListener("click", mostrarColor);
@@ -86,22 +90,38 @@ function noPinta(e) {
   grillaPixeles.removeEventListener("mouseover", pintaMoviendo);
 } 
 
-var pixelesBlancos = document.getElementById("grilla-pixeles");
-//var borrar = document.getElementById("borrar");
-//var botonBorrar = borrar.addEventListener("click", borrarTodo);
 
-$("#borrar").click(function(){
-  $(".grilla-pixeles").animate({"background-color": "#ffffff"}, 1000);
+var botonBorrar = document.getElementById("borrar");
+var $divPixeles = $("#grilla-pixeles div");
+
+
+
+botonBorrar.addEventListener("click", function(){
+  $divPixeles.animate({"background-color": "white"}, 700);
 });
 
-/*if(botonBorrar) {
-  $(document).ready(function(){
-    $(".pixeles-blancos").animate({"background-color": "#ffffff"}, 1000)
-  }); 
-  ;
-}
-*/
-  
+var batmanD = document.getElementById("batman");
+var wonderD = document.getElementById("wonder");
+var flashD = document.getElementById("flash");
+var invisibleD = document.getElementById("invisible");
 
-mostrarPaletaColores();
-mostrarGrilla();
+batmanD.addEventListener("click", function(){
+  cargarSuperheroe(batmanDeadpool);
+});
+
+wonderD.addEventListener("click", function(){
+  cargarSuperheroe(wonder);
+});
+
+flashD.addEventListener("click", function(){
+  cargarSuperheroe(flash);
+});
+
+invisibleD.addEventListener("click", function(){
+  cargarSuperheroe(invisible);
+});
+
+var botonGuardar = document.getElementById("guardar");
+botonGuardar.addEventListener("click", function(){
+  guardarPixelArt();
+});

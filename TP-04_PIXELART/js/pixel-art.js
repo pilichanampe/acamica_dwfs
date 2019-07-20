@@ -120,18 +120,22 @@ var invisibleD = document.getElementById("invisible");
 
 batmanD.addEventListener("click", function(){
   cargarSuperheroe(batman);
+  limpiarArreglos();
 });
 
 wonderD.addEventListener("click", function(){
   cargarSuperheroe(wonder);
+  limpiarArreglos();
 });
 
 flashD.addEventListener("click", function(){
   cargarSuperheroe(flash);
+  limpiarArreglos();
 });
 
 invisibleD.addEventListener("click", function(){
   cargarSuperheroe(invisible);
+  limpiarArreglos();
 });
 
 var botonGuardar = document.getElementById("guardar");
@@ -139,24 +143,39 @@ botonGuardar.addEventListener("click", function(){
   guardarPixelArt();
 });
 
+function limpiarArreglos() {
+  listadoDivCambiados = [];
+  listadoDivDeshechos = [];
+  listadoColoresOriginales = [];
+  listadoColoresNuevos = [];
+}
+
+
+
+
 var botonDeshacer = document.getElementById("deshacer");
 botonDeshacer.addEventListener("click", function(){
 
-  var divRehacer = listadoDivCambiados.pop();
-  var colorRehacer = listadoColoresOriginales.pop();
+  if (listadoDivCambiados.length > 0 ){
+    var divRehacer = listadoDivCambiados.pop();
+    var colorRehacer = listadoColoresOriginales.pop();
 
-  listadoDivDeshechos.push(divRehacer);
-  listadoColoresNuevos.push( $(divRehacer).css("background-color")  );
-  $(divRehacer).css({"background-color":colorRehacer})
+    listadoDivDeshechos.push(divRehacer);
+    listadoColoresNuevos.push( $(divRehacer).css("background-color")  );
+    $(divRehacer).css({"background-color":colorRehacer})
+  }
 });
 
 var botonRehacer = document.getElementById("rehacer");
 botonRehacer.addEventListener("click", function(){
   
-  var divRehacer = listadoDivDeshechos.pop();
-  var colorRehacer = listadoColoresNuevos.pop();
+  if (listadoDivDeshechos.length > 0 ){
 
-  listadoDivCambiados.push(divRehacer);
-  listadoColoresOriginales.push( $(divRehacer).css("background-color")  );
-  $(divRehacer).css({"background-color":colorRehacer})
+    var divRehacer = listadoDivDeshechos.pop();
+    var colorRehacer = listadoColoresNuevos.pop();
+
+    listadoDivCambiados.push(divRehacer);
+    listadoColoresOriginales.push( $(divRehacer).css("background-color")  );
+    $(divRehacer).css({"background-color":colorRehacer})
+  }
 });

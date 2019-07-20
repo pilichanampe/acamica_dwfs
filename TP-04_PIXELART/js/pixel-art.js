@@ -23,6 +23,13 @@ var nombreColores = ['White', 'LightYellow',
 var paleta = document.getElementById("paleta");
 var grillaPixeles = document.getElementById("grilla-pixeles");
 
+
+var listadoDivCambiados = [];
+var listadoDivDeshechos = [];
+var listadoColoresOriginales = [];
+var listadoColoresNuevos = [];
+
+
 function mostrarPaletaColores() {
   for(var i = 0; i < nombreColores.length; i++) {
     var color = document.createElement("div");
@@ -38,6 +45,7 @@ mostrarPaletaColores();
 function mostrarGrilla() {
   for(var i = 0; i < 1750; i++) {
     var pixel = document.createElement("div");
+    pixel.id = 'pixel-'+i;
     grillaPixeles.appendChild(pixel);
   }
 }
@@ -57,7 +65,12 @@ function mostrarColor(e) {
 //grillaPixeles.addEventListener("click", pintar);
 
 function pintar(e) {
+  listadoDivCambiados.push(e.target);
+  listadoColoresOriginales.push(e.target.style.backgroundColor);
   e.target.style.backgroundColor = selecColor.style.backgroundColor;
+
+  listadoDivDeshechos = [];
+  listadoColoresNuevos = []; 
 
 }
 
@@ -124,4 +137,26 @@ invisibleD.addEventListener("click", function(){
 var botonGuardar = document.getElementById("guardar");
 botonGuardar.addEventListener("click", function(){
   guardarPixelArt();
+});
+
+var botonDeshacer = document.getElementById("deshacer");
+botonDeshacer.addEventListener("click", function(){
+
+  var divRehacer = listadoDivCambiados.pop();
+  var colorRehacer = listadoColoresOriginales.pop();
+
+  listadoDivDeshechos.push(divRehacer);
+  listadoColoresNuevos.push( $(divRehacer).css("background-color")  );
+  $(divRehacer).css({"background-color":colorRehacer})
+});
+
+var botonRehacer = document.getElementById("rehacer");
+botonRehacer.addEventListener("click", function(){
+  
+  var divRehacer = listadoDivDeshechos.pop();
+  var colorRehacer = listadoColoresNuevos.pop();
+
+  listadoDivCambiados.push(divRehacer);
+  listadoColoresOriginales.push( $(divRehacer).css("background-color")  );
+  $(divRehacer).css({"background-color":colorRehacer})
 });

@@ -71,56 +71,37 @@ colorPersonalizado.addEventListener('change',
 );
 
 
-var pintando =  true;
 grillaPixeles.addEventListener("mousedown", pintaClick);
-grillaPixeles.addEventListener("mouseover", pintaMoviendo)
 grillaPixeles.addEventListener("mouseup", noPinta);
-
-
 
 function pintaClick(e) {
   e.target.style.backgroundColor = pintar(e);
-  pintando = grillaPixeles.addEventListener("mouseover", pintaMoviendo);
+  grillaPixeles.addEventListener("mouseover", pintaMoviendo);
 }
 function pintaMoviendo(e) {
   e.target.style.backgroundColor = pintar(e);
-  pintando = grillaPixeles.addEventListener("mousedown", pintaClick);
 }
 
 function noPinta(e) {
-  pintando = grillaPixeles.removeEventListener("mouseover", pintaMoviendo);
+  grillaPixeles.removeEventListener("mouseover", pintaMoviendo);
 } 
 
+var pixelesBlancos = document.getElementById("grilla-pixeles");
+//var borrar = document.getElementById("borrar");
+//var botonBorrar = borrar.addEventListener("click", borrarTodo);
 
- 
+$("#borrar").click(function(){
+  $(".grilla-pixeles").animate({"background-color": "#ffffff"}, 1000);
+});
 
-
-/*grillaPixeles.addEventListener("mousedown", pintarApretando);
-grillaPixeles.addEventListener("mouseup", dejarPintar);
-//grillaPixeles.addEventListener("mouseover", arrastrarPintar)
-
-function pintarApretando(e) {
-  e.target.style.backgroundColor = pintar(e);
-  grillaPixeles.addEventListener("mouseover", arrastrarPintar)
+/*if(botonBorrar) {
+  $(document).ready(function(){
+    $(".pixeles-blancos").animate({"background-color": "#ffffff"}, 1000)
+  }); 
+  ;
 }
-
-function dejarPintar() {
-  grillaPixeles.removeEventListener("mouseover", arrastrarPintar);
-
-
-}
-
-function arrastrarPintar(e) {
-  e.target.style.backgroundColor = pintar(e);
-}
-
-function noArrastrarPintar(e) {
-  e.target.style.backgroundColor = e.target.style.backgroundColor;
-}
-  
-  //return false;
 */
-
+  
 
 mostrarPaletaColores();
 mostrarGrilla();

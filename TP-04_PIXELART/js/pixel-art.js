@@ -106,7 +106,7 @@ var flashD = document.getElementById("flash");
 var invisibleD = document.getElementById("invisible");
 
 batmanD.addEventListener("click", function(){
-  cargarSuperheroe(batmanDeadpool);
+  cargarSuperheroe(batman);
 });
 
 wonderD.addEventListener("click", function(){

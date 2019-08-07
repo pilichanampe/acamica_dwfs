@@ -1,5 +1,5 @@
 // Arreglo que contiene las intrucciones del juego 
-var instrucciones = ["Bienvenido al juego Deadpool-ized", "Para ganar, deberás mover las flechas del teclado hasta ordenar la imagen como se mostrará a continuación:"];
+var instrucciones = ["Bienvenido al juego Deadpool-ized.", "Para ganar, deberás mover las flechas del teclado hasta ordenar la imagen como se mostrará a continuación:"];
 // Arreglo para ir guardando los movimientos que se vayan realizando
 var movimientos = []; 
 
@@ -53,7 +53,7 @@ function chequearSiGano() {
 // Implementar alguna forma de mostrar un cartel que avise que ganaste el juego
 function mostrarCartelGanador() {
   alert("¡Felicitaciones! Has ganado un vale por 10 chimichangas gratis.")
-  iniciar();
+  mezclarPiezas(30);
 }
 
 

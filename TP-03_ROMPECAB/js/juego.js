@@ -21,8 +21,8 @@ Cada elemento de este arreglo deberá ser mostrado en la lista con id 'lista-ins
 Para eso deberás usar la función ya implementada mostrarInstruccionEnLista().
 Podés ver su implementación en la ultima parte de este codigo. */
 function mostrarInstrucciones(instrucciones) {
-    for(i = 0; i < instrucciones.length; i++){
-      mostrarInstruccionEnLista(instrucciones[i], "lista-instrucciones")
+    for(i = 0; i < instrucciones.length; i++) {
+      mostrarInstruccionEnLista(instrucciones[i], "lista-instrucciones");
     }
 }
 
@@ -52,7 +52,7 @@ function chequearSiGano() {
 
 // Implementar alguna forma de mostrar un cartel que avise que ganaste el juego
 function mostrarCartelGanador() {
-  alert("¡Felicitaciones! Has ganado un vale por 10 chimichangas gratis.")
+  alert("¡Felicitaciones! Has ganado un vale por 10 chimichangas gratis.");
   mezclarPiezas(30);
 }
 
@@ -83,11 +83,10 @@ function actualizarPosicionVacia(nuevaFila, nuevaColumna) {
 // Para chequear si la posicón está dentro de la grilla.
 function posicionValida(fila, columna) {
   if (fila < grilla.length && columna < grilla[0].length && fila >= 0 && columna >= 0){
-    return true
+    return true;
   }
-  else
-  {
-    return false
+  else {
+    return false;
   }
 }
 
@@ -125,10 +124,10 @@ function moverEnDireccion(direccion) {
   Para que esta parte del código funcione correctamente deberás haber implementado 
   las funciones posicionValida, intercambiarPosicionesGrilla y actualizarPosicionVacia */
 
-    if (posicionValida(nuevaFilaPiezaVacia, nuevaColumnaPiezaVacia)){
+    if (posicionValida(nuevaFilaPiezaVacia, nuevaColumnaPiezaVacia)) {
         intercambiarPosiciones(filaVacia, columnaVacia, nuevaFilaPiezaVacia, nuevaColumnaPiezaVacia);
         actualizarPosicionVacia(nuevaFilaPiezaVacia, nuevaColumnaPiezaVacia);
-        agregarUltimaDireccion(direccion)
+        agregarUltimaDireccion(direccion);
         
   //COMPLETAR: Agregar la dirección del movimiento al arreglo de movimientos
 

@@ -53,7 +53,9 @@ function chequearSiGano() {
 // Implementar alguna forma de mostrar un cartel que avise que ganaste el juego
 function mostrarCartelGanador() {
   alert("¡Felicitaciones! Has ganado un vale por 10 chimichangas gratis.")
+  iniciar();
 }
+
 
 /* Función que intercambia dos posiciones en la grilla.
 Pensar como intercambiar dos posiciones en un arreglo de arreglos. 

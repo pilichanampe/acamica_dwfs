@@ -111,6 +111,7 @@ var $divPixeles = $("#grilla-pixeles div");
 
 botonBorrar.addEventListener("click", function(){
   $divPixeles.animate({"background-color": "white"}, 700);
+  limpiarArreglos();
 });
 
 var batmanD = document.getElementById("batman");
@@ -143,15 +144,14 @@ botonGuardar.addEventListener("click", function(){
   guardarPixelArt();
 });
 
+$(batmanD).one( "click", function() { alert("Lo sorry, DC Comics. You've been Deadpool-ized."); } );
+
 function limpiarArreglos() {
   listadoDivCambiados = [];
   listadoDivDeshechos = [];
   listadoColoresOriginales = [];
   listadoColoresNuevos = [];
 }
-
-
-
 
 var botonDeshacer = document.getElementById("deshacer");
 botonDeshacer.addEventListener("click", function(){
@@ -179,3 +179,4 @@ botonRehacer.addEventListener("click", function(){
     $(divRehacer).css({"background-color":colorRehacer})
   }
 });
+

@@ -36,7 +36,6 @@ function mostrarPaletaColores() {
     color.className = "color-paleta";
     color.style.backgroundColor = nombreColores[i];
     paleta.appendChild(color);
-
   }
 }
 
@@ -59,11 +58,8 @@ function mostrarColor(e) {
   selecColor.style.backgroundColor = e.target.style.backgroundColor;
 }
 
-
-
 //pintar en Grilla
 //grillaPixeles.addEventListener("click", pintar);
-
 function pintar(e) {
   listadoDivCambiados.push(e.target);
   listadoColoresOriginales.push(e.target.style.backgroundColor);
@@ -108,43 +104,46 @@ var botonBorrar = document.getElementById("borrar");
 var $divPixeles = $("#grilla-pixeles div");
 
 
-
 botonBorrar.addEventListener("click", function(){
   $divPixeles.animate({"background-color": "white"}, 700);
   limpiarArreglos();
 });
+
 
 var batmanD = document.getElementById("batman");
 var wonderD = document.getElementById("wonder");
 var flashD = document.getElementById("flash");
 var invisibleD = document.getElementById("invisible");
 
-batmanD.addEventListener("click", function(){
+batmanD.addEventListener("click", function() {
   cargarSuperheroe(batman);
   limpiarArreglos();
 });
 
-wonderD.addEventListener("click", function(){
+wonderD.addEventListener("click", function() {
   cargarSuperheroe(wonder);
   limpiarArreglos();
 });
 
-flashD.addEventListener("click", function(){
+flashD.addEventListener("click", function() {
   cargarSuperheroe(flash);
   limpiarArreglos();
 });
 
-invisibleD.addEventListener("click", function(){
+invisibleD.addEventListener("click", function() {
   cargarSuperheroe(invisible);
   limpiarArreglos();
 });
 
 var botonGuardar = document.getElementById("guardar");
-botonGuardar.addEventListener("click", function(){
+botonGuardar.addEventListener("click", function() {
   guardarPixelArt();
 });
 
-$(wonderD).one( "click", function() { alert("Lo sorry, DC Comics. You've been Deadpool-ized."); } );
+//Muestra un alert una sola vez, la primera vez que se hace click en cualquiera de las imagenes precargadas.
+$(".imgs").one( "click", function() { 
+  alert("Lo sorry, DC Comics. You've been Deadpool-ized."); 
+});
 
 function limpiarArreglos() {
   listadoDivCambiados = [];
@@ -154,20 +153,20 @@ function limpiarArreglos() {
 }
 
 var botonDeshacer = document.getElementById("deshacer");
-botonDeshacer.addEventListener("click", function(){
+botonDeshacer.addEventListener("click", function() {
 
   if (listadoDivCambiados.length > 0 ){
-    var divRehacer = listadoDivCambiados.pop();
-    var colorRehacer = listadoColoresOriginales.pop();
+    var divDeshacer = listadoDivCambiados.pop();
+    var colorDeshacer = listadoColoresOriginales.pop();
 
-    listadoDivDeshechos.push(divRehacer);
-    listadoColoresNuevos.push( $(divRehacer).css("background-color")  );
-    $(divRehacer).css({"background-color":colorRehacer})
+    listadoDivDeshechos.push(divDeshacer);
+    listadoColoresNuevos.push($(divDeshacer).css("background-color"));
+    $(divDeshacer).css({"background-color":colorDeshacer});
   }
 });
 
 var botonRehacer = document.getElementById("rehacer");
-botonRehacer.addEventListener("click", function(){
+botonRehacer.addEventListener("click", function() {
   
   if (listadoDivDeshechos.length > 0 ){
 
@@ -175,8 +174,8 @@ botonRehacer.addEventListener("click", function(){
     var colorRehacer = listadoColoresNuevos.pop();
 
     listadoDivCambiados.push(divRehacer);
-    listadoColoresOriginales.push( $(divRehacer).css("background-color")  );
-    $(divRehacer).css({"background-color":colorRehacer})
+    listadoColoresOriginales.push($(divRehacer).css("background-color"));
+    $(divRehacer).css({"background-color":colorRehacer});
   }
 });
 

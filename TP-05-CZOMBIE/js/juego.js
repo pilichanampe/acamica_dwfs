@@ -46,13 +46,13 @@ var Juego = {
   ],
   // Los enemigos se agregaran en este arreglo.
   enemigos: [
-
+    
   ]
 
 }
 
 /* Se cargan los recursos de las imagenes, para tener un facil acceso
-a ellos. No hace falta comprender esta parte. Pero si queres agregar tus propies
+a ellos. No hace falta comprender esta parte. Pero si queres agregar tus propias
 imagenes tendras que poner su ruta en la lista para que pueda ser precargada como
 todas las demas. */
 Juego.iniciarRecursos = function() {
@@ -132,7 +132,7 @@ Juego.capturarMovimiento = function(tecla) {
   if (this.chequearColisiones(movX + this.jugador.x, movY + this.jugador.y)) {
     /* Aca tiene que estar la logica para mover al jugador invocando alguno
     de sus metodos  */
-
+      Jugador.moverse();
     /* COMPLETAR */
   }
 };
@@ -178,6 +178,7 @@ un recorrido por los enemigos para dibujarlos en pantalla ahora habra que hacer
 una funcionalidad similar pero para que se muevan.*/
 Juego.moverEnemigos = function() {
   /* COMPLETAR */
+  
 };
 
 /* Recorre los enemigos para ver cual esta colisionando con el jugador
@@ -189,9 +190,11 @@ Juego.calcularAtaques = function() {
     if (this.intersecan(enemigo, this.jugador, this.jugador.x, this.jugador.y)) {
       /* Si el enemigo colisiona debe empezar su ataque
       COMPLETAR */
+      Enemigo.comenzarAtacar(Jugador);
     } else {
       /* Sino, debe dejar de atacar
       COMPLETAR */
+      Enemigo.dejarDeAtacar(Jugador);
     }
   }, this);
 };

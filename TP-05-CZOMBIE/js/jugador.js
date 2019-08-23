@@ -12,12 +12,19 @@ var Jugador = {
   vidas: 5,
     // Hay que agregar lo que falte al jugador: movimientos, perdida de vidas,
   // y todo lo que haga falta para que cumpla con sus responsabilidades
-  perderVidas: function() {
-
-  },
-  moverse: function() {
-    
-  }
 }
 
-dibujarEntidad(Jugador);
+Jugador.moverse = function() {
+  switch () {
+    case 'der':
+      this.x += 5;
+      break;
+
+    case 'izq':
+      this.x -= 5;
+    case 'arr':
+      this.y += 5;
+    case 'abajo':
+      this.y -= 5;
+  }
+}

@@ -85,7 +85,7 @@ Electrodomestico.prototype.setColor = function(colorElectrodomestico) {
     }
 };
 
-var heladera = new Electrodomestico();
+var lavadora = new Electrodomestico();
 
 
 
@@ -116,6 +116,18 @@ Electrodomestico.prototype.precioFinal = function () {
         case 'B':
             this.precio = 80;
             break;
+        case 'C':
+            this.precio = 60;
+            break;
+        case 'D':
+            this.precio = 50;
+            break;
+        case 'E':
+            this.precio = 30;
+            break;
+        case 'F':
+            this.precio = 10;
+            break;
         default:
             precio = 10;
     }
@@ -127,6 +139,10 @@ Electrodomestico.prototype.precioFinal = function () {
         case this.peso > 20 && this.peso < 49:
             precio += 50;
             break;
+        case this.peso >= 50 && this.peso <= 79:
+            precio += 80;
+        case this.peso >= 80:
+            precio += 100;
         default:
     }
     
@@ -151,6 +167,7 @@ Televisor.prototype.precioFinal = function () {
 }
 
 var tele = new Televisor(200, 'rojo', 'A', 15, 40);
+var tele2 = new Televisor(300, 'azul', 'A', 15, 42);
 
 /*function Persona(nombre, apellido) {
 	this.nombre = nombre;
@@ -168,3 +185,166 @@ Persona.prototype.getNombre = function() {
 }
 
 */
+
+
+
+
+
+//clase jueves 22/08
+//sin get y set podemos cambiar los valores de los atributos sin validación alguna, y no es buena práctica. Entonces, puedo romper todo el objeto porque me salto las validaciones que hace la clase
+//siempre hay que ir por los metodos de la clase
+//metodos accesores, se usan para poder validar los datos. Es mala práctica no usar setters y getters
+//.call --> 
+
+
+//codigo pasado por el profe en Slack
+function Electrodomestico(precioBase = 100, color = 'Blanco', consumoEnergetico = 'F', peso = 5,) {
+    this.precioBase = precioBase;
+    this.color = color;
+    this.consumoEnergetico = consumoEnergetico;
+    this.peso = peso;
+}
+​
+Electrodomestico.prototype.getColor = function () {
+    return this.color;
+}
+​
+Electrodomestico.prototype.precioFinal = function () {
+    var precio = 0;
+    switch(this.consumoEnergetico) {
+        case 'A':
+            precio = 100;
+            break;
+        case 'B':
+            precio = 80;
+            break;
+        default:
+            precio = 10;
+    }
+​
+    switch(true) {
+        case this.peso < 20:
+            precio += 10;
+            break;
+        case this.peso > 20 && this.peso < 49:
+            precio += 50;
+            break;
+        default:
+    }
+​
+    return this.precioBase + precio;
+}
+​
+function Televisor(precioBase, color, consumoEnergetico, peso, pulgadas) {
+    Electrodomestico.call(this, precioBase, color, consumoEnergetico, peso);
+    this.pulgadas = pulgadas;
+}
+​
+Televisor.prototype = Object.create(Electrodomestico.prototype);
+Televisor.prototype.constructor = Televisor;
+​
+Televisor.prototype.precioFinal = function (){
+    var precio = 0;
+    /**
+     * Para que me devuelva el precio en base
+     * a sus características de electrodoméstico
+     * hago uso del método de su superclase para
+     * reutilizar código.
+     */
+    var precioPorSerElectrodomestico = Electrodomestico.prototype.precioFinal.call(this);
+​
+    switch (true) {
+        case this.pulgadas < 40:
+            precio = 20;
+            break;
+        case this.pulgadas > 40:
+            precio = 50;
+            break;
+        default:
+    }
+    return precioPorSerElectrodomestico + precio;
+}
+​
+var tele = new Televisor(200, 'Negro', 'A', 15, 42);
+
+//TEMA NUEVO: PRUEBAS DE SOFTWARE O TESTING
+//pruebas automáticas, de caja negra, unitarias
+//caso border, caso líimte ej: [1,2, 'a']
+ //es un caso raro. Tiene una letra mezclada con numeros
+ //? --> es un if rapido!! syntaxis sugar
+ //
+ function sumatoria(elementos) {
+    var suma = 0;
+    for(var i = 0; i < elementos.length; i++) {
+      if (typeof elementos[i] === 'number') {
+        suma += elementos[i];
+      }	
+    }
+  
+    return suma;
+  }
+  
+  function division(a, b) {
+    return a/b;
+  }
+​
+  function promedio(elementos) {
+    var suma = sumatoria(elementos);
+    var promedio = division(suma, elementos.length);
+  
+    return promedio;
+  }
+
+  function testSumatoriaNumerosPositivos() {
+    var entrada = [1, 2, 3];
+    var resultadoEsperado = 6;
+    var salida = sumatoria(entrada);
+  ​
+    return salida === resultadoEsperado;
+  }
+  ​
+  function testSumatoriaNumerosNegativos() {
+    var entrada = [-1, -2, -3];
+    var resultadoEsperado = -6;
+    var salida = sumatoria(entrada);
+  ​
+    return salida === resultadoEsperado;
+  }
+  ​
+  function testSumatoriaNumerosMixtos() {
+    var entrada = [1, -2, 3];
+    var resultadoEsperado = 2;
+    var salida = sumatoria(entrada);
+  ​
+    return salida === resultadoEsperado;
+  }
+  ​
+  function testSumatoriaNoNumeros() {
+    var entrada = [1, 2, 'a'];
+    var resultadoEsperado = 3;
+    var salida = sumatoria(entrada);
+  ​
+    return salida === resultadoEsperado;
+  }
+  ​
+  function run() {
+    console.log(
+      'testSumatoriaNumerosPositivos: ',
+      testSumatoriaNumerosPositivos() ? 'OK' : 'FAILED'
+    );
+  ​
+    console.log(
+      'testSumatoriaNumerosNegativos: ',
+      testSumatoriaNumerosNegativos() ? 'OK' : 'FAILED'
+    );
+  ​
+    console.log(
+      'testSumatoriaNumerosMixtos: ',
+      testSumatoriaNumerosMixtos() ? 'OK' : 'FAILED'
+    );
+  ​
+    console.log(
+      'testSumatoriaNoNumeros: ',
+      testSumatoriaNoNumeros() ? 'OK' : 'FAILED'
+    );
+  }

@@ -19,3 +19,5 @@ var Jugador = {
     
   }
 }
+
+dibujarEntidad(Jugador);

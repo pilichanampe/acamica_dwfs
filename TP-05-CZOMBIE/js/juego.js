@@ -132,7 +132,7 @@ Juego.capturarMovimiento = function(tecla) {
   if (this.chequearColisiones(movX + this.jugador.x, movY + this.jugador.y)) {
     /* Aca tiene que estar la logica para mover al jugador invocando alguno
     de sus metodos  */
-      Jugador.moverse();
+      Jugador.mover(movX, movY);
     /* COMPLETAR */
   }
 };

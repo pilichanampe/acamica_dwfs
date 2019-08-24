@@ -146,7 +146,7 @@ Electrodomestico.prototype.precioFinal = function () {
         default:
     }
     
-    return this.precoiBase + precio;
+    return this.precioBase + precio;
 }
 
 

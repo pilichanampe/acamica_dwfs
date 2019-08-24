@@ -22,9 +22,15 @@ var Juego = {
     de ejemplo, pero podras agregar muchos mas. */
     new Obstaculo('imagenes/valla_horizontal.png', 70, 430, 30, 30, 1),
     new Obstaculo('imagenes/valla_horizontal.png', 100, 430, 30, 30, 1),
-       
-
-  ],
+    new Obstaculo('imagenes/valla_horizontal.png', 830, 130, 30, 30, 1),
+    new Obstaculo('imagenes/valla_horizontal.png', 850, 430, 30, 30, 1),
+    //cambiar imagenes para tener distintos obstaculos
+    new Obstaculo('imagenes/bache.png', 780, 230, 30, 30, 1),
+    new Obstaculo('imagenes/bache.png', 110, 250, 30, 30, 1),
+    new Obstaculo('imagenes/bache.png', 460, 250, 30, 30, 1),
+    new Obstaculo('imagenes/auto_verde_derecha.png', 120, 490, 30, 15, 1),
+    new Obstaculo('imagenes/auto_verde_abajo.png', 550, 430, 15, 30, 1),
+    ],
   /* Estos son los bordes con los que se puede chocar, por ejemplo, la vereda.
    Ya estan ubicados en sus lugares correspondientes. Ya aparecen en el mapa, ya
    que son invisibles. No tenes que preocuparte por ellos.*/
@@ -132,8 +138,8 @@ Juego.capturarMovimiento = function(tecla) {
   if (this.chequearColisiones(movX + this.jugador.x, movY + this.jugador.y)) {
     /* Aca tiene que estar la logica para mover al jugador invocando alguno
     de sus metodos  */
-      Jugador.mover(movX, movY);
-    /* COMPLETAR */
+      /* COMPLETAR */
+    Jugador.moverse(movX, movY);
   }
 };
 
@@ -209,6 +215,7 @@ Juego.chequearColisiones = function(x, y) {
     if (this.intersecan(obstaculo, this.jugador, x, y)) {
 
       /*COMPLETAR, obstaculo debe chocar al jugador*/
+      Obstaculo.chocarJugador(Jugador);
 
       puedeMoverse = false
     }

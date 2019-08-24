@@ -25,7 +25,7 @@ var Dibujante = {
   },
 
   /* Dibuja una entidad en el juego, esto puede ser el jugador, un enemigo, etc
-   es decir, cualquiera objeto que separ responder a los mensajes: sprite, x, y, ancho y alto*/
+   es decir, cualquiera objeto que sepa responder a los mensajes: sprite, x, y, ancho y alto*/
   dibujarEntidad: function (entidad) {
     this.dibujarImagen(entidad.sprite, entidad.x, entidad.y, entidad.ancho, entidad.alto);
   },

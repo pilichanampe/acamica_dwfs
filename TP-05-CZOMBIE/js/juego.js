@@ -52,6 +52,7 @@ var Juego = {
   ],
   // Los enemigos se agregaran en este arreglo.
   enemigos: [
+    new Enemigo('imagenes/zombie1.png', )
     
   ]
 

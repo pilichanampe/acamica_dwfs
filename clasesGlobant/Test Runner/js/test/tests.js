@@ -17,6 +17,6 @@ describe('Test función ingresar', function (){
     it('Con números mayor a cero', function (){
         var ale = new Cuenta('Ale', 500);
         
-        expect(salida).to.be('true');
+        expect().to.be('true');
     });
 });

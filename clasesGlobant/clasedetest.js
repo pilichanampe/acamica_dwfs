@@ -89,3 +89,37 @@
   }
 
   //NO ME SALE NAAADA, NO ME FUNCIONÓ NINGUNA FUNCIÓN... FUCK.kfkdfkfdk
+
+  //clase jueves 29/08
+
+  class Cuenta {
+    constructor(titular, cantidad) {
+      this.titular = titular;
+      this.cantidad = cantidad;
+    }
+
+  /*  getCantidad() {
+      return this.cantidad;
+    }
+
+    setCantidad(cantidad) {
+      this.cantidad = cantidad;
+    }
+
+    ingresar(cantidad) {
+      if(cantidad < 0) {
+        return true;
+      }
+
+    retirar(cantidad, monto) {
+        if(cantidad > monto) {
+          cantidad = 0;
+        }
+      }
+
+    }*/
+
+    retirar(cantidad) {
+      this.cantidad -= cantidad;
+    }
+  } // estará esto bien?? funcionará?? Fuck.

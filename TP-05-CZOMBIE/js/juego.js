@@ -217,6 +217,8 @@ Juego.chequearColisiones = function(x, y) {
 
       /*COMPLETAR, obstaculo debe chocar al jugador*/
       Obstaculo.chocarJugador(Jugador);
+      Obstaculo.dejarDeChocar();
+     
 
       puedeMoverse = false
     }

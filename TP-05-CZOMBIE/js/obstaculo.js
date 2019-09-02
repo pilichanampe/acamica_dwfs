@@ -14,11 +14,19 @@ var Obstaculo = function (sprite, x, y, ancho, alto, potencia) {
 }
 
 Obstaculo.prototype.setPotencia = function () {
-  return this.potencia = 0;
+  return this.potencia = potencia;//CHEQUEAR, NO ESTA BIEN
 }
 
 
 Obstaculo.chocarJugador = function() {
   Jugador.perderVidas(1);
- 
+   
 }
+
+Obstaculo.dejarDeChocar = function() {
+  this.potencia -= 1;
+}
+/*Obstaculo.perderPotencia = function(potenica) {
+  this.potencia = ;
+}
+*/

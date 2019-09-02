@@ -13,6 +13,12 @@ var Obstaculo = function (sprite, x, y, ancho, alto, potencia) {
   // el jugador pierda vidas
 }
 
+Obstaculo.prototype.setPotencia = function () {
+  return this.potencia = 0;
+}
+
+
 Obstaculo.chocarJugador = function() {
-  Jugador.perderVidas();
+  Jugador.perderVidas(1);
+ 
 }

@@ -193,9 +193,9 @@ un recorrido por los enemigos para dibujarlos en pantalla ahora habra que hacer
 una funcionalidad similar pero para que se muevan.*/
 Juego.moverEnemigos = function() {
   /* COMPLETAR */
-  this.enemigos.forEach(function(zombiecaminante) {
+  this.enemigos.forEach(function(enemigo) {
     /* Completar */
-    //zombiecaminante.mover(ZombieCaminante);
+    //ZombieCaminante.mover(enemigo);
   });
 }
 

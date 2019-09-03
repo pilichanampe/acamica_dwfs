@@ -348,3 +348,66 @@ var tele = new Televisor(200, 'Negro', 'A', 15, 42);
       testSumatoriaNoNumeros() ? 'OK' : 'FAILED'
     );
   }
+
+
+  //  CLASE MARTES 3/09
+  //  Git y GitHub
+  //sistema de control de versiones:
+  // sistemaas que permiten llevar un control de cada cambio, ya sea un proyecto o un archivo
+  // comparar los cambios de las versiones, ver qué se agregó o qué se quitó
+  // VCS Local:
+    //Crear una base de datos donde se guardan estos cambios. Solo registra los cambios de ese archivo y lo guarda localmente en la computadora.
+        //Desventaja: 
+  //CVCs Sistemas de control centralizados
+    //se guardan en servers. Cada colaborador puede acceder a los mismos cambios y todos trabajar en el mismo proyecto yq ue podamos ver los cambios de todos los colaboradores.
+    //Desventaja: sí o sí necesitamos tener internet || Si le pasa algo, como está centralizado, se pierde todo.
+  //DVCS Sistemas de Control Distribuidos
+    //cada colaborador tiene una copia de esos cambios.
+        //Ventaja: si un colaborador pierde la info, puede sacarla de otro colaborador || Permite trabajar sín conexión a internet, trabajar localmente y después lo subís al repositorio servidor común a todos.
+    
+    //Git -- Sistema de Control de Versiones Distribuido:
+        //Sistema de control más general, común a todos
+        //Está basado en snapshots
+        //casi todas las operaciones son locales
+        //Tiene 3 estados:
+            //Modified--> Cuando estamos modificando o creando un archivo
+            //Staged--> preparado para entregar. Nos permite elegir qué cambios queremos que se entreguen y cuáles no
+            //Committed--> archivo entregado
+        //FLUJO MÁS BÁSICO DE GIT
+            //modificar los arcihvos
+            //Seleccionas los cambios a marcar como entrega
+            //realoizar la entrega para guardarlos permanentemente enel repositorio.
+
+        //CREAR UN REPOSITORIO
+            //a. Creamos un repositorio de cero
+            //b. Descargamos un repositorio externo.
+
+            //git init --> inicializa un proyecto dentro de la carpeta donde estemos
+            //mkdir--> crea un directorio
+            //dentro de .git está toda la configuración de todos los cambios que se van guardando... es una carpeta oculta
+            //git clone--> 
+
+            //git status--> permite ver en qué estado estamos en nuestro proyecto. Qué archivos fueron modificados, qué archivos están marcados para crear 
+            //touch--> crea un archivo?
+            //git add--> agregamos el archivo o cambio al segundo estado que mencionamos, y lo deja preparado para entregar
+            //git commit -m "descripción de nuestro commit"
+
+            //git push origin --> subir al repositorio
+            //git pull --> bajar localmente los últimos cambios
+
+            //BRANCHES --> ramificaciones que se hacen de un proyecto
+            //master es la copia original.
+                //Si queremos trabajar una versión, pero no queremos perder el original, creamos branches, ramas que toma de la original para poder trabajar por ella, sin estar preocupados de que mandemos macana
+                //get branch nombreDeMiBranch --> creamos un nuevo branch
+                //get checkout nombreDeMiBranch --> me mueve a ese nuevo branch creado para poder trabajar en él.
+                
+                //git merge nombreDeMiBranch --> une mi rama con el master, los "mergea" y ya quedan unificados la branch con el master. Ya no hay path separado.
+
+                //CONFLICTOS
+                    //si hay conflictos, te hace elegir entre las cosas que difieren antes de mergear.
+
+                //git reset--> podemos volver a la versión de cualquier commit que hayamos hecho... BUSCAR MÁS INFO, NO ME QUEDÓ CLARO.
+                //git log--> da un historial de todos los commit que hicimos
+                //
+
+        

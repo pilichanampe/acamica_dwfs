@@ -87,7 +87,7 @@ Electrodomestico.prototype.setColor = function(colorElectrodomestico) {
 
 var lavadora = new Electrodomestico();
 
-
+ 
 
 
 

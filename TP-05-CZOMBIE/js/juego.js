@@ -17,6 +17,8 @@ var Juego = {
   // Indica si el jugador gano
   ganador: false,
 
+  obstaculoX: Obstaculo,
+
   obstaculosCarretera: [
     /*Aca se van a agregar los obstaculos visibles. Tenemos una valla horizontal
     de ejemplo, pero podras agregar muchos mas. */
@@ -41,19 +43,25 @@ var Juego = {
     new Obstaculo('', 0, 5, 18, 572, 0),
     new Obstaculo('', 943, 5, 18, 572, 0),
     // Veredas
-    new Obstaculo('', 18, 23, 51, 536, 2),
-    new Obstaculo('', 69, 507, 690, 52, 2),
-    new Obstaculo('', 587, 147, 173, 360, 2),
-    new Obstaculo('', 346, 147, 241, 52, 2),
-    new Obstaculo('', 196, 267, 263, 112, 2),
-    new Obstaculo('', 196, 23, 83, 244, 2),
-    new Obstaculo('', 279, 23, 664, 56, 2),
-    new Obstaculo('', 887, 79, 56, 480, 2)
+    new Obstaculo('', 18, 23, 51, 536, 1),
+    new Obstaculo('', 69, 507, 690, 52, 1),
+    new Obstaculo('', 587, 147, 173, 360, 1),
+    new Obstaculo('', 346, 147, 241, 52, 1),
+    new Obstaculo('', 196, 267, 263, 112, 1),
+    new Obstaculo('', 196, 23, 83, 244, 1),
+    new Obstaculo('', 279, 23, 664, 56, 1),
+    new Obstaculo('', 887, 79, 56, 480, 1)
   ],
   // Los enemigos se agregaran en este arreglo.
   enemigos: [
-    new Enemigo('imagenes/zombie1.png', )
-    
+    new ZombieCaminante('imagenes/zombie1.png', 470, 150, 10, 10, 10, 5),
+    new ZombieCaminante('imagenes/zombie2.png', 450, 160, 10, 10, 10, 5),
+    new ZombieCaminante('imagenes/zombie3.png', 500, 100, 10, 10, 10, 5),
+    new ZombieCaminante('imagenes/zombie4.png', 400, 450, 10, 10, 10, 5),
+    new ZombieCaminante('imagenes/zombie1.png', 450, 470, 10, 10, 10, 5),
+    new Enemigo('imagenes/tren_horizontal.png', 400, 322, 90, 30, 10, 5, "h"),
+    new Enemigo('imagenes/tren_vertical.png', 644, 0, 30, 90, 10, 5, "v"),
+    new Enemigo('imagenes/tren_vertical.png', 678, 0, 30, 90, 10, 5, "v"),    
   ]
 
 }
@@ -185,8 +193,11 @@ un recorrido por los enemigos para dibujarlos en pantalla ahora habra que hacer
 una funcionalidad similar pero para que se muevan.*/
 Juego.moverEnemigos = function() {
   /* COMPLETAR */
-  
-};
+  this.enemigos.forEach(function(zombiecaminante) {
+    /* Completar */
+    //zombiecaminante.mover(ZombieCaminante);
+  });
+}
 
 /* Recorre los enemigos para ver cual esta colisionando con el jugador
 Si colisiona empieza el ataque el zombie, si no, deja de atacar.
@@ -214,14 +225,42 @@ Juego.chequearColisiones = function(x, y) {
   var puedeMoverse = true
   this.obstaculos().forEach(function(obstaculo) {
     if (this.intersecan(obstaculo, this.jugador, x, y)) {
+      puedeMoverse = false
 
-      /*COMPLETAR, obstaculo debe chocar al jugador*/
-      Obstaculo.chocarJugador(Jugador);
-      Obstaculo.dejarDeChocar();
+        if (obstaculo.potencia > 0) {
+           
+        Obstaculo.chocarJugador(Jugador);
+      //  obstaculo.potencia = obstaculo.potencia -1
+        Obstaculo.perderPotencia(obstaculo);
+
+
+
+
+
+
+
+
+
+
+
+
+
+      }
+    
+
+      //if (this.obstaculo.potencia > 0) {
+       /*COMPLETAR, obstaculo debe chocar al jugador*/
+        
+        
+        
+        
+        
+    //}
+
      
 
-      puedeMoverse = false
-    }
+      
+      }
   }, this)
   return puedeMoverse
 };

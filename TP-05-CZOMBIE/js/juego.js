@@ -54,14 +54,14 @@ var Juego = {
   ],
   // Los enemigos se agregaran en este arreglo.
   enemigos: [
-    new ZombieCaminante('imagenes/zombie1.png', 470, 150, 10, 10, 10, 5),
-    new ZombieCaminante('imagenes/zombie2.png', 450, 160, 10, 10, 10, 5),
-    new ZombieCaminante('imagenes/zombie3.png', 500, 100, 10, 10, 10, 5),
-    new ZombieCaminante('imagenes/zombie4.png', 400, 450, 10, 10, 10, 5),
-    new ZombieCaminante('imagenes/zombie1.png', 450, 470, 10, 10, 10, 5),
-    //new Enemigo('imagenes/tren_horizontal.png', 400, 322, 90, 30, 10, 5, "h"),
-   // new Enemigo('imagenes/tren_vertical.png', 644, 0, 30, 90, 10, 5, "v"),
-   // new Enemigo('imagenes/tren_vertical.png', 678, 0, 30, 90, 10, 5, "v"),    
+    new ZombieCaminante('imagenes/zombie1.png', 470, 150, 10, 10, 1, 5),
+    new ZombieCaminante('imagenes/zombie2.png', 450, 160, 10, 10, 3, 5),
+    new ZombieCaminante('imagenes/zombie3.png', 500, 100, 10, 10, 3, 5),
+    new ZombieCaminante('imagenes/zombie4.png', 400, 450, 10, 10, 2, 5),
+    new ZombieCaminante('imagenes/zombie1.png', 450, 470, 10, 10, 3, 5),
+    new ZombieConductor('imagenes/tren_horizontal.png', 400, 322, 90, 30, 10, 5,"h" ),
+    new ZombieConductor('imagenes/tren_vertical.png', 644, 0, 30, 90, 10, 5, "v"),
+    new ZombieConductor('imagenes/tren_vertical.png', 678, 0, 30, 90, 10, 5, "v"),    
   ]
 
 }
@@ -195,7 +195,7 @@ Juego.moverEnemigos = function() {
   /* COMPLETAR */
   this.enemigos.forEach(function(enemigo) {
     /* Completar */
-    //enemigo.mover();--> era esto!! 
+    enemigo.mover();
   });
 }
 

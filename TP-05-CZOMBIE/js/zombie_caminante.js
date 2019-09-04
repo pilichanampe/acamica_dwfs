@@ -20,6 +20,7 @@ ZombieCaminante.prototype.mover = function() {
   if (Math.random() < 0.5) {
     this.x -= this.velocidad;
     this.y -= this.velocidad;
+    
   } else {
     //Sino, hace otro movimiento
     this.y += this.velocidad;

@@ -13,14 +13,15 @@ velocidad: es la velocidad de movimiento, pixeles que podra moverse en cada mov
 rangoMov: los limites en el mapa donde se puede mover, sera un diccionario con la
 siguiente forma: {desdeX: valor, hastaX: valor, desdeY: valor, hastaY: valor} */
 
-var Enemigo = function (sprite, x, y, ancho, alto, velocidad, rangoMov) {
+var Enemigo = function (sprite, x, y, ancho, alto, velocidad, rangoMovX, rangoMovY) {
   this.sprite = sprite;
   this.x = x;
   this.y = y;
   this.ancho = ancho;
   this.alto = alto;
   this.velocidad = velocidad;
-  this.rangoMov = rangoMov;
+  this.rangoMovX = rangoMovX;
+  this.rangoMovY = rangoMovY;
   this.atacando = false;
 }
 

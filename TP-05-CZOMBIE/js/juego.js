@@ -209,11 +209,11 @@ Juego.calcularAtaques = function() {
     if (this.intersecan(enemigo, this.jugador, this.jugador.x, this.jugador.y)) {
       /* Si el enemigo colisiona debe empezar su ataque
       COMPLETAR */
-     // Enemigo.comenzarAtacar(Jugador);
+      enemigo.comenzarAtaque(Jugador);
     } else {
       /* Sino, debe dejar de atacar
       COMPLETAR */
-      //Enemigo.dejarDeAtacar(Jugador);
+      enemigo.dejarDeAtacar(Jugador);
     }
   }, this);
 };

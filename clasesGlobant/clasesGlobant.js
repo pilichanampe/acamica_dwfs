@@ -410,4 +410,66 @@ var tele = new Televisor(200, 'Negro', 'A', 15, 42);
                 //git log--> da un historial de todos los commit que hicimos
                 //
 
+
+
+ //JUEVES CLASE 5/09/2019
+   //JAVASCRIPT PATRONES DE DISEÑO
+   //que resuelven los patrones de diseño: soluciones a problemas que pasan muy a menudo. SOlucion prediseñada.
+   //Patron de diseño: solucion a un problema de diseño. Debe haber comprobado su efectividad, debe ser reutilizable. Aplicado a distintas circunstancias.
+   //Requerimientos arquitectónicos que encontramos a la hora de desarrollar una solucion de software.
+   //patron: metodología estandarizada...
+   //objetivos
+    //proporcionar catalogos de elementos reutilizables
+    //evitar la reiteracion
+    //formalizar un vocabulario comun entre diseñadores
+    //estandarizar el modo en que se realiza el diseño
+    //facilitar el aprendizaje a las nuevas generaciones
+    //3 patrones fundamentales:
+            //Patrón Módulo:
+                //Permite definir métodos privados y públicos dentro de un objeto.
+                //permite emular el comportamiento de una clase como en otros lenguajes de software orientados a objetos.
+                //habilita que métodos y propiedades estén protegidos del scope global
+                
+                //FUNCION AUTOINVOCADA
+                    //funcion anónima que se ejecuta sola al momento de crearse. ife --> inmediate invoqued funtion --> BUSCAR BIEN COMO SE ESCRIBE
+                    (function() {
+                        console.log("hola");
+                    }()); //debo pasarlo a una sentencia para que el compilador me lo pueda leer.
+
+                    //el patron modulo usa esta forma para poder hacer metodos privados y publicos dentro de un objeto.
+                    var saludo = (function() {
+                        return 'hola';
+                    }());
+
+                    //BUSCAR Array.prototype.reduce() --> qué es esto?? estudiarlo. Es un ACUMULADOR
+                    
+                    // .reduce --> un conjunto de valores, te lo reduce a un solo valor.
+                   /* var promedio = (function( ) {
+                        function sumatoria (numeros) {
+                            return numeros.reduce (acc, valor) => acc + valor, promedio, 0);
+                        }
+
+                        console.log(sumatoria[1, 2, 3])
+                    })*/
+
+
+                    var promedio = (function() {
+                        function sumatoria (numeros) {
+                          return numeros
+                                .reduce((acc, valor) => acc + valor, 0);
+                        }
+                      
+                        function dividir(a, b) {
+                          return a/b;
+                        }
+                      
+                        function promedio (valores) {
+                          return dividir(
+                            sumatoria(valores), valores.length
+                          );
+                        }
+                      
+                        return promedio;
+                      }());
+                
         

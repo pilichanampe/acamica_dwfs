@@ -471,5 +471,49 @@ var tele = new Televisor(200, 'Negro', 'A', 15, 42);
                       
                         return promedio;
                       }());
+
+
+   //PATRON OBSERVER
+    //Esun patron donde el objeto (conocido como el subject/sujeto) mantiene una lista de objetos dependientes de el (observer/obseevadores), los cuales automaticamente notifican sobre cualquier cambio de estado.
+    
+    //cuando un sueto necesita notificar a los observadores sobre algo interesante que está pasando transmite una... blabla leer presentacion.
+    //
+    function Subject() {
+        this.observers = [];
+      }
+      
+      Subject.prototype.addObserver = function(observer) {
+        this.observers.push(observer);
+      }
+      
+      Subject.prototype.notify = function (news) {
+        for (var i = 0; i < this.observers.length; i++) {
+          if (news === this.observers[i].news) {
+            this.observers[i].listener();
+          }
+        }
+      }
+      
+      function Observer(news, listener) {
+        this.news = news;
+        this.listener = listener;
+      }
+      
+      var sujeto = new Subject();
+      var onClick = new Observer('click', function () {
+        console.log('Hicieron click por ahí.');
+      });
+      
+      var onKeydown = new Observer('keydown', function () {
+        console.log('Presionaron una tecla por ahí.');
+      });
+      
+      sujeto.addObserver(onClick);
+      sujeto.addObserver(onKeydown);
+      
+      sujeto.notify('click');
+      sujeto.notify('keydown');
+
+      
                 
         

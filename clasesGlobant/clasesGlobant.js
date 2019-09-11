@@ -514,6 +514,22 @@ var tele = new Televisor(200, 'Negro', 'A', 15, 42);
       sujeto.notify('click');
       sujeto.notify('keydown');
 
-      
-                
-        
+
+//MARTES 10/09
+//PATRON MVC
+//Se crea para poder resolver un problema grave del software: codigo mezclado, enredado. Modulo-Vista-Controlador.
+//Regla de oro de software de caliadad: LA SEPARACION DE RESPONSABILIDADES. Por eso existen las clases, el paradigma orientado a objetos y el MVC.
+//Tenemos modulos con una funcionalidad bien definida. Las funciones deben hacer una sola cosa... Si la funcion hace todo, no conviene. POr ej: funcion suma, funcion division, y otra función que las combina para obtener un promedio.
+//Funciones bien definidas, cortitas, que hagan una sola cosa.
+//Este patrón resuelve estos problemas.
+//Tener todo junto trae muchos problemas.
+//MODELO: CONTIENE UNA REPRESENTACION DE LOS DATOS QUE MANEJA EL SISTEMA, SU LOGICA DE NEGOCIO Y SU MECANIOSMO DE PERSISTENCIA.
+      //gralmente son motores de base de datos, APIs.
+      //el modelo no deberia tener "logica de negocios"[NO SE QUE QUIERE DECIR ESTO. BUSCAR]--> 
+      //se encarga de persistir nuestra data, como la entrega y como la guarda en la base de datos.
+//VISTA: es la interfaz de usuario. La representa visualmente. COmpone la informacion que se envia al cliente y los mecanismos interaccion con este.
+//CONTROLADOR: actua como el intermediario entre el modelo y la vista, gestiona el flujo de informacion entre ellos y las transformaciones para adoptar los datos a las necesidades de cada uno.
+
+//lo mas desacoplado que se pueda hacer un software, mejor.. que no tengan dependencia fuerte sus partes entre si.
+//angular, enver, usan patron MVC, 
+//

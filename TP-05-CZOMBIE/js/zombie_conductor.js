@@ -55,3 +55,6 @@ ZombieConductor.prototype.mover = function() {
     //this.y = this.rangoMovY + (this.rangoMovY - this.rangoMovY)/2;
 }
 
+ZombieConductor.prototype.atacar = function(jugador) {
+  jugador.perderVidas(1000);
+}

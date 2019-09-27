@@ -533,3 +533,27 @@ var tele = new Televisor(200, 'Negro', 'A', 15, 42);
 //lo mas desacoplado que se pueda hacer un software, mejor.. que no tengan dependencia fuerte sus partes entre si.
 //angular, enver, usan patron MVC, 
 //
+
+
+
+//29/09/19 clase jueves 
+//Trabajando con APIs... más perdida que una Esfera del Dragón en Universo Marvel.
+
+//Buscar que es Node en Apis...
+//Buscar qué es un mapa... es como un forEach. La diferencia es que devuelve un arreglo
+
+//ASINCRONIA EN JS
+//tiempo de respuesta del servidor... tardan en responder por cuestiones físicas. NO es instantaneo.
+//concepto de asincronia...
+      //como hay procesos que tardan, se van haciendo otras cosas mientras llega la respuesta del servidor.
+      //js se construyó en base a un asincronismo nativo. Fue diseñado para la web.
+      
+      //responde porque trabaja en paralelo: asincronia. Trabaja diferentes cosas en paralelo
+      //send --=> envia informacion al servidor
+      //concurrencia, empiezan en distintos tiempos, tambien es asincrónico pero no en paralelo al mismo tiempo.
+      //codigo bloqueante y no bloqueante
+        //bloqueante: una operacion tiene que terminar para que empiece la que sigue. Va bloqueando. No se puede hacer ninguna otra
+        //accion hasta que termine la anterior.
+        //no bloqueante: la asincronia permite tener codigo no bloqueante.
+        //callbacks --> se va a ejecutar cuando pase un evento. Pieza clave para que js funcione de forma asincronica.
+        

@@ -556,4 +556,6 @@ var tele = new Televisor(200, 'Negro', 'A', 15, 42);
         //accion hasta que termine la anterior.
         //no bloqueante: la asincronia permite tener codigo no bloqueante.
         //callbacks --> se va a ejecutar cuando pase un evento. Pieza clave para que js funcione de forma asincronica.
-        
+      function(bla){
+        var bla = "ble";
+      }

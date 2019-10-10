@@ -559,3 +559,58 @@ var tele = new Televisor(200, 'Negro', 'A', 15, 42);
       function(bla){
         var bla = "ble";
       }
+
+//clase martes 1/10/19
+//Promesas
+//modelo de asincronismo.       
+//asignar la funcion a un evento 
+//apis Fetch y Axios
+//Promesas, las apis Fetch y Axios se basan en promesas
+//el 90% de los proyectos estan basados en promesas
+//se le dice promesa porque representa un valor que puede estar disponible ahora, en el futuro o nunca, representa la terminacion
+//o el fracaso eeventual de una operacion asincrona.
+//BUSCAR DIFERENCIA ENTRE EVENTO Y PROMESA...
+//
+//Una promesa se implementa
+
+var resuelvo = true;
+
+var promesa = new Promise(function(resolve, reject) {
+  if (resuelvo) {
+    resolve('Resolví :)');
+  } else {
+  reject('Rechacé :(');
+});//chequear, no se por qué me da que esta mal el parentesis...
+//buscar then y catch...
+
+promesa.then(function(respuesta) {})//solo las cosas que se resuelvan van a pasar por el then
+//Buscar async - Await, bloque finally
+
+//es mas facil de usar Axios que Fetch
+ //Es un cliente http y está basado en promesas. Usan promesas para implementarlo.
+ //se puede usar desde el navegador o desde node.js
+ //hay que incluir la libreria axios en un script en el html... es un codigo js
+
+ //CLASE JUEVES 3/03
+ //NODE.JS
+  //DESARROLLO BACKEND
+  //no se ve, no se puede visualizar
+  //acceso a los perifericos
+  //en el backend hay miles de lenguajes de programacion. 
+  //Usar javascript en el desarrollo de backend, sabemos las mismas reglas para programar en un sistema operativo
+  //Ryan Dahl creó node.js. Es una plataforma que ejecuta codigo js y se interpreta como js al lenguaje maquina.
+    //tiene acceso a las api del sistema operativo. Sistema de archivo, de permisos... etc
+    //puedo programar con js pero trabajando en el sistema operativo.
+
+    //es un entorno en tiempo de ejecucion multiplataforma de codigo abierto. basado en el lenguaje de programacion ECMASCRIPT
+    //asincrono, con entradas y salida de datos em una arquitectura orientada a eventos y basado en el motor v8 de google.
+    //es creado para Chrome, su evolucion esta apatrinada por la empresa Joyent.
+    //NO ES un lenguaje de programacion, una libreria o framework, un programa en javascript.
+
+    //
+    
+    //CLASE MARTES 8/10
+    //se trabaja base de datos con npm
+    //el mundaneum de Paul Olett
+    //base de datos, un conjunto de informacion en un mismo contexto sea facilmente accesible en cualquier momento
+    //

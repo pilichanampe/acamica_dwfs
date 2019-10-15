@@ -556,7 +556,7 @@ var tele = new Televisor(200, 'Negro', 'A', 15, 42);
         //accion hasta que termine la anterior.
         //no bloqueante: la asincronia permite tener codigo no bloqueante.
         //callbacks --> se va a ejecutar cuando pase un evento. Pieza clave para que js funcione de forma asincronica.
-      function(bla){
+      var test = function (bla){
         var bla = "ble";
       }
 
@@ -580,7 +580,7 @@ var promesa = new Promise(function(resolve, reject) {
     resolve('Resolví :)');
   } else {
   reject('Rechacé :(');
-});//chequear, no se por qué me da que esta mal el parentesis...
+}});
 //buscar then y catch...
 
 promesa.then(function(respuesta) {})//solo las cosas que se resuelvan van a pasar por el then
@@ -613,4 +613,66 @@ promesa.then(function(respuesta) {})//solo las cosas que se resuelvan van a pasa
     //se trabaja base de datos con npm
     //el mundaneum de Paul Olett
     //base de datos, un conjunto de informacion en un mismo contexto sea facilmente accesible en cualquier momento
+    //TIPOS DE BASE DE DATOS 
+      //relacional: sql se basan en la organizacion de la infomacion en trozo pequeños que se relacionan entre ellos mediante la relacion de identificadores.
+          //sql --> lenguaje de consulta Structure Query Language
+          //INTEGRIDAD DE LOS DATOS --> las bases de datos ponen restricciones
+          //transacciones --> cada una ocurre de principio a fin. O bien sucede todo con exito, o si algo falla, esto se cancela.
+            //tienen dos estados: exitoso o fallido.
+          //conformidad con ACID --> Atomicidad, Coherencia, Aislamiento, Durabilidad. 
+            //atomicidad --Si una transacción no puede
+               //suceder parcialmente
+            //coherencia
+
+            //aislamiento --> 
+
+            //durabilidad --> si nuestra transaccion fue exitosa, esos datos van a ser pernmanentes.
+
+      //no relacional: nosql, no tienen un idenificador que sirva de relacion entre un conjunto de datos y otros.
+
+      //COMO SE DISEÑAN LAS BASES DE DATOS
+        //DIAGRAMA ENTIDAD-RELACION --> grafica como va a ser la relacion de entidades en nuestra base de datos.
+        //qué es una entidad? ==> son objetos. Es algo que se puede definirL objeto, persona o evento.
+        //relaciones --> uno a uno, muchos a uno, uno a muchos, muchos a muchos.
+        //
+
+        //clave primaria y clave foranea
+            //CLAVE PRIMARIA -- PRIMARY KEY
+                // pERMITE DARLE UN identificador unico a esa identidad.
+                    //Nos asegura que ni haya datos duplicados
+                    //Puede haber una sola clave primaria por cada tabla
+                    //No puede ser nula.
+
+                //CLAVE FORANEA
+                    //ES una columna que se corresponde con una clave primaria en otra tabla. esto permite unir tablas paa componer datos.
+
+
+
+            //TIPOS DE DATOS
+                //numericos(INT)
+                //caracteres(CHAR)
+                //fechas(DATETIME)
+                //Strings(VARCHAR)
+
+        //SISTEMAS DE GESTION DE BASE DE DATOS (DBMS)
+
+            //Permiten interactuar con la base de datos
+            //Los más populares
+                  //MySQL --> open source
+                  //Microsoft SQL Server
+                  //Oracle DB
+                  //PostgreSQL
+                  //MongoDB
+
+            //MYSQL
+                //Facilita herramientas para trabajar sobre la base de datos
+
     //
+
+
+
+    //clase jueves 10-10-19
+    
+
+
+

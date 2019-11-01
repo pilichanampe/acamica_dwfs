@@ -674,5 +674,64 @@ promesa.then(function(respuesta) {})//solo las cosas que se resuelvan van a pasa
     //clase jueves 10-10-19
     
 
+    //clase martes 15/10/19
+
+    //auto_increment va incrementando un numero cada vez que pasan los datos.
+
+    //show --> muestra la base de datos
+    //describe --> describe nuestros datos
+    //scripts sql, permiten escribir una vez los datos.
+      //archivo con extension .sql
+
+     //
 
 
+
+     //CLASE JUEVES 17/10/19
+
+     //
+//JOIN nos permite combinar datos de dos o m{as tablas diferentes.
+    // 
+
+
+    //CLASE 31/10/19
+
+    //Node modules
+    //en Node podemos crear nuestros propios modulos.
+      //common js no se esta usando tanto. Hay una arquitectura mejor, ECMAScript 6. Está bien usar las dos, pero la primera
+      //está cayendo en desuso
+
+      
+      //palabras clave:
+        //module.exports: 
+        //require: hay que poner una ruta relativa --> ./ es la única forma de usar modulos propios nuestros. Si no, directamente
+        //va a buscar directamente en NOde Modules y no en nuestro proyecto. Es para que busque localmente
+
+        //Express router
+           //Un router, me permite tener varios caminos para elegir.
+           //routers o direccionadores
+           //
+
+
+           //Parametros de rutas
+              //nos permiten definir en nuestras rutas parametros que sn variables, de esta forma podemos definir rutas dinamicas que recuperan
+              //otra logica de acuerdo al parametro pasado.
+
+              //los params sirven para hacer las rutas dinamicas
+
+              //parametros de consulta
+                  //no se tienen que definir en las rutas.
+
+
+              //Middlewares
+                  //son funciones
+                  //a nivel de aplicacion, se ejecuta siempre antes de llegar a cualquier ruta.
+                  //es un programa intermedio que se va a ejecutar siempre
+
+
+                  //GET http://api.joaquin.com/tareas
+                  //GET http://api.joaquin.com/tareas/1
+                  //PUT http://api.joaquin.com/tareas/1
+                  //GET http://api.joaquin.com/tareas?prioridad=alta
+
+                  var blu = '';

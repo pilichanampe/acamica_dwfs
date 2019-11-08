@@ -4,10 +4,10 @@ Por ejemplo, la cantidad parametros que recibe su constructor. En ZombieConducto
 no son exactamente los mismos parametros que en el objeto Enemigo, a diferencia
 del ZombieCaminante que eran los mismos. */
 
-var ZombieConductor = function(sprite, x, y, ancho, alto, velocidad, rangoMovX, direccion) {
+var ZombieConductor = function(sprite, x, y, ancho, alto, velocidad, rangoMov, direccion) {
   /* Completar constructor a partir de Enemigo */
 
-    Enemigo.call(this, sprite, x, y, ancho, alto, velocidad, rangoMovX);
+    Enemigo.call(this, sprite, x, y, ancho, alto, velocidad, rangoMov);
     this.direccion = direccion;
   }
   //Enemigo.call(/* ... */);
@@ -27,7 +27,7 @@ ZombieConductor.prototype.mover = function() {
   toca uno de sus limites, modificando su velocidad. Si multiplicamos por -1 la
   velocidad lo que estamos haciendo es invertir su direccion.*/
   
-    if (this.x < this.rangoMovX) {
+    if (this.x < this.rangoMov) {
       this.velocidad *= -1;
     
     }
@@ -42,7 +42,7 @@ ZombieConductor.prototype.mover = function() {
     this.y += this.velocidad; 
     
      
-    if (this.y < this.rangoMovX) {
+    if (this.y < this.rangoMov) {
       this.velocidad *= -1;  
     }
 

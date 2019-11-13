@@ -17,7 +17,7 @@ var Juego = {
   // Indica si el jugador gano
   ganador: false,
   
-  reiniciarJuego: false,
+  reinicioJuego: false,
 
   obstaculoX: Obstaculo,
 
@@ -114,7 +114,11 @@ Juego.comenzar = function() {
 var reqAnimacion;
 
 Juego.buclePrincipal = function() {
-  //var self = this;
+  if(this.reinicioJuego) {
+    setTimeout(Juego.buclePrincipal,1000);
+    return;
+  };
+  
   // Con update se actualiza la logica del juego, tanto ataques como movimientos
   this.update();
   // Funcion que dibuja por cada fotograma a los objetos en pantalla.
@@ -298,9 +302,10 @@ Juego.iniciarRecursos();
 Juego.restart = function(tecla) {
   //pausa
   if (tecla == "enter") {
-    this.reiniciarJuego = true;
+    this.reinicioJuego = true;
   } else {
-    this.reiniciarJuego = false;
+    this.reinicioJuego = false;
+    
   }
 }
 

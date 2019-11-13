@@ -115,8 +115,8 @@ var reqAnimacion;
 
 Juego.buclePrincipal = function() {
   if(this.reinicioJuego) {
-    setTimeout(Juego.buclePrincipal,1000);
-    return;
+    setTimeout(this.buclePrincipal,1000);
+    return window.location.reload();
   };
   
   // Con update se actualiza la logica del juego, tanto ataques como movimientos
@@ -127,7 +127,9 @@ Juego.buclePrincipal = function() {
   reqAnimacion = window.requestAnimationFrame(this.buclePrincipal.bind(this));
   if (this.ganoJuego() || this.terminoJuego()) {
     window.cancelAnimationFrame(reqAnimacion);
-    }
+  }
+
+ 
 };
 
 Juego.update = function() {

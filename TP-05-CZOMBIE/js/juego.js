@@ -16,7 +16,8 @@ var Juego = {
   vidasInicial: Jugador.vidas,
   // Indica si el jugador gano
   ganador: false,
-  //jugando: true,
+  
+  reiniciarJuego: false,
 
   obstaculoX: Obstaculo,
 
@@ -120,7 +121,7 @@ Juego.buclePrincipal = function() {
   this.dibujar();
   // Esto es una forma de llamar a la funcion Juego.buclePrincipal() repetidas veces
   reqAnimacion = window.requestAnimationFrame(this.buclePrincipal.bind(this));
-  if (this.ganoJuego() || this.terminoJuego()/* == !this.jugando*/) {
+  if (this.ganoJuego() || this.terminoJuego()) {
     window.cancelAnimationFrame(reqAnimacion);
     }
 };
@@ -293,6 +294,16 @@ Juego.ganoJuego = function() {
 
 Juego.iniciarRecursos();
 
+//funcion para pausar el juego
+Juego.restart = function(tecla) {
+  //pausa
+  if (tecla == "enter") {
+    this.reiniciarJuego = true;
+  } else {
+    this.reiniciarJuego = false;
+  }
+}
+
 // Activa las lecturas del teclado al presionar teclas
 // Documentacion: https://developer.mozilla.org/es/docs/Web/API/EventTarget/addEventListener
 document.addEventListener('keydown', function(e) {
@@ -301,8 +312,8 @@ document.addEventListener('keydown', function(e) {
     38: 'arriba',
     39: 'der',
     40: 'abajo',
-    13: 'reiniciar'
+    13: 'enter'
   };
-
+  Juego.restart(allowedKeys[e.keyCode]);
   Juego.capturarMovimiento(allowedKeys[e.keyCode]);
 });

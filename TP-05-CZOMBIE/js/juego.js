@@ -127,9 +127,7 @@ Juego.buclePrincipal = function() {
   reqAnimacion = window.requestAnimationFrame(this.buclePrincipal.bind(this));
   if (this.ganoJuego() || this.terminoJuego()) {
     window.cancelAnimationFrame(reqAnimacion);
-  }
-
- 
+  } 
 };
 
 Juego.update = function() {
@@ -300,17 +298,6 @@ Juego.ganoJuego = function() {
 
 Juego.iniciarRecursos();
 
-//funcion para pausar el juego
-Juego.restart = function(tecla) {
-  //pausa
-  if (tecla == "enter") {
-    this.reinicioJuego = true;
-  } else {
-    this.reinicioJuego = false;
-    
-  }
-}
-
 // Activa las lecturas del teclado al presionar teclas
 // Documentacion: https://developer.mozilla.org/es/docs/Web/API/EventTarget/addEventListener
 document.addEventListener('keydown', function(e) {
@@ -321,6 +308,11 @@ document.addEventListener('keydown', function(e) {
     40: 'abajo',
     13: 'enter'
   };
-  Juego.restart(allowedKeys[e.keyCode]);
+
+  //Chequeo para reiniciar el juego
+  if(allowedKeys[e.keyCode] == "enter") {
+    Juego.reinicioJuego = true;
+    window.requestAnimationFrame(Juego.buclePrincipal.bind(Juego));
+  }
   Juego.capturarMovimiento(allowedKeys[e.keyCode]);
 });

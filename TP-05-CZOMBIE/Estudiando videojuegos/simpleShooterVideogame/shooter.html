@@ -1,0 +1,767 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+
+<head>
+   
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <style>
+		canvas:-webkit-full-screen {
+		  width: 100% !important;
+		  height: 100% !important;
+		}
+		canvas:-moz-full-screen {
+		  width: 100% !important;
+		  height: 100% !important;
+		}
+		canvas:-ms-fullscreen {
+		  width: 100% !important;
+		  height: 100% !important;
+		}
+		canvas:fullscreen {
+		  width: 100% !important;
+		  height: 100% !important;
+		}
+		audio {display:none}
+		
+    </style>
+</head>
+
+<body style="margin:0px;padding:0px;overflow:hidden">
+
+    <canvas id="canvas" style="cursor:none;" tabindex="0"></canvas>
+    <audio id="shoot">  <source src="sound/shoot.wav" type="audio/ogg"></audio>
+    <audio id="bomb">  <source src="sound/bomb.wav" type="audio/ogg"></audio>
+    <audio id="expl1">  <source src="sound/expl1.mp3" type="audio/ogg"></audio>
+
+    <script>
+       const SHIP_ENERGY=100,       //starting ship energy
+             MAX_MISSILES=3,        // max number of our missiles on screen
+             BACKGROUND_SPEED=-4,   // scrolling speed
+             INITIAL_BOMB_RATE=996, //bomb rate - if random nbr (1,1000) > 996, enemy shoots. decreasing with waves
+             BOMB_SPEED=7,          // speed of enemy bombs
+             MISSILE_SPEED=8,        // speed of our rockets
+             SHIP_BOMB_COLLISION=20,    //number of pixel in overlap to be a collision
+             ENEMY_MISSILE_COLLISION=20,//
+             SHIP_ENEMY_COLLISION=50    //
+       ;
+
+        function imagesRepo() {
+            this.enemyYellow = new Image();
+            this.enemyYellow.src = "img/ufo_yellow.png";
+            this.enemyYellow.onload = function () { this.isLoaded = true; };
+            this.enemyYellow.verticalImageFrames = 6;
+            this.enemyYellow.horizontalImageFrames = 1;
+
+            this.enemyRed = new Image();
+            this.enemyRed.src = "img/ufo_red.png";
+            this.enemyRed.onload = function () { this.isLoaded = true; };
+            this.enemyRed.verticalImageFrames = 6;
+            this.enemyRed.horizontalImageFrames = 1;
+
+            this.enemyBlue = new Image();
+            this.enemyBlue.src = "img/ufo_blue.png";
+            this.enemyBlue.onload = function () { this.isLoaded = true; };
+            this.enemyBlue.verticalImageFrames = 6;
+            this.enemyBlue.horizontalImageFrames = 1;
+
+            this.cloud = new Image();
+            this.cloud.src = "img/cloud.png";
+            this.cloud.onload = function () { this.isLoaded = true; debugger};
+            this.cloud.verticalImageFrames = 1;
+            this.cloud.horizontalImageFrames = 1;
+
+            this.missile = new Image();
+            this.missile.src = "img/missile.png";
+            this.missile.onload = function () { this.isLoaded = true; };
+            this.missile.verticalImageFrames = 1;
+            this.missile.horizontalImageFrames = 1;
+
+            this.background = new Image();
+            this.background.src = "img/field.png";
+            this.background.onload = function () { this.isLoaded = true; };
+            this.background.verticalImageFrames = 1;
+            this.background.horizontalImageFrames = 1;
+
+            this.smallExplosion = new Image();
+            this.smallExplosion.src = "img/expl1.png";
+            this.smallExplosion.onload = function () { this.isLoaded = true; };
+            this.smallExplosion.verticalImageFrames = 1;
+            this.smallExplosion.horizontalImageFrames = 16;
+
+            this.largeExplosion = new Image();
+            this.largeExplosion.src = "img/expl2.png";
+            this.largeExplosion.onload = function () { this.isLoaded = true; };
+            this.largeExplosion.verticalImageFrames = 1;
+            this.largeExplosion.horizontalImageFrames = 16;
+
+            this.ship = new Image();
+            this.ship.src = "img/ship.png";
+            this.ship.onload = function () { this.isLoaded = true; };
+            this.ship.verticalImageFrames = 4;
+            this.ship.horizontalImageFrames = 1;
+
+            this.enemyBomb = new Image();
+            this.enemyBomb.src = "img/bomb.png";
+            this.enemyBomb.onload = function () { this.isLoaded = true; };
+            this.enemyBomb.verticalImageFrames = 4;
+            this.enemyBomb.horizontalImageFrames = 1;
+
+            this.getImageFor = function (item, wave) {
+
+                if (item instanceof cloud) return this.cloud;
+                if (item instanceof background) return this.background;
+                if (item instanceof missile) return this.missile;
+                if (item instanceof explosion) return this.smallExplosion;
+                if (item instanceof explosion2) return this.largeExplosion;
+                if (item instanceof enemyBomb) return this.enemyBomb;
+                if (item instanceof ship) return this.ship;
+                if (item instanceof enemy && wave % 3 == 1) return this.enemyYellow;
+                if (item instanceof enemy && wave % 3 == 2) return this.enemyRed;
+                if (item instanceof enemy && wave % 3 == 0) return this.enemyBlue;
+            }
+        }
+
+        function gameObject(x, y, wave) {
+            this.x = x;
+            this.y = y;
+            this.currentFrame=1;
+            this.image = images.getImageFor(this, wave);
+            this.offsetLeftEnergy = 0;
+        }
+       
+        gameObject.prototype.getFrameHeight = function () {
+            return this.image.height / this.image.verticalImageFrames;
+        }
+        gameObject.prototype.getFrameWidth = function () {
+            return this.image.width / this.image.horizontalImageFrames;
+        }
+        gameObject.prototype.nextImageFrame = function (onlyOnce) {
+            this.currentFrame++;
+
+            if (this.currentFrame > this.image.verticalImageFrames * this.image.horizontalImageFrames) {
+                if (onlyOnce)
+                    this.tbd = true;
+                else
+                    this.currentFrame = 1;
+            }
+        }
+
+
+        function scene() {
+            this.gameItems = [];
+            this.ship = null;
+            this.wave = 0;
+            this.gameTicks = 0;
+            this.score = 0;
+			this.paused=false;
+            this.started=false;
+        }
+
+        scene.prototype.countOf = function (type) {
+            var c = 0;
+            this.gameItems.forEach(
+                function (item, index) {
+                    if (item instanceof type) c++;
+                });
+            return c;
+        }
+
+        scene.prototype.initEnemies = function () {
+            this.gameItems.push(new message("Wave " + this.wave));
+
+            var t = this;
+            for (var j = 0; j < 4 + (2 * this.wave); j++) {
+                setTimeout(function () {
+                    t.gameItems.push(new enemy(0, 0, t.wave));
+                }, 200 * j);
+            }
+        }
+        scene.prototype.init = function () {
+            this.gameItems.push(new background(0, 0));
+
+            this.ship = (new ship(100, 100));
+            this.gameItems.push(this.ship);
+           // this.initEnemies();
+
+            var t = this;
+            setInterval(function () { t.gameItems.push(new cloud(0, 0)); }, 1000);
+
+            t.drawAll();
+
+        };
+
+        scene.prototype.drawAll = function () {
+            this.gameTicks++;
+            if (this.gameTicks == 1000) this.gameTicks = 0;
+
+            purgeTbd(this.gameItems);
+            this.gameItems.sort(compareZindex);
+           
+            if (this.started && this.countOf(enemy) == 0 && this.countOf(message) == 0) {
+                this.wave++;
+                this.initEnemies();
+            }
+            if (!this.paused)
+            {
+                this.gameItems.forEach(
+                    function (item, index) {
+                        item.draw();
+                });
+            }
+             
+            this.setScore();
+            if (this.ship.isDead) this.gameOver();
+			if (! this.started) this.clickToStart();
+
+			var t = this;
+            requestAnimationFrame(function () {
+                t.drawAll()
+            });
+
+        };
+        scene.prototype.setScore = function () {
+            ctx.save();
+            ctx.fillStyle = "white";
+            ctx.font = '20pt Impact';
+            ctx.textAlign = "left";
+            ctx.fillText("SCORE: " + this.score, 20, canvas.height - 20);
+
+            ctx.textAlign = "right";
+            ctx.fillText("WAVE: " + this.wave, canvas.width - 20, canvas.height - 20);
+            ctx.restore();
+        }
+        scene.prototype.gameOver = function () {
+            ctx.save();
+            ctx.font = '100pt Impact';
+            ctx.textAlign = "center";
+            ctx.fillText("GAME OVER", canvas.width / 2, canvas.height / 2);
+            ctx.restore();
+        }
+        scene.prototype.clickToStart=function(){
+            ctx.save();
+            ctx.font = '40pt Impact';
+            ctx.textAlign = "center";
+            ctx.fillText("Click/tap to start", canvas.width / 2, 50+ canvas.height / 2);
+            ctx.restore();
+        };
+        function ship(x, y) {
+            gameObject.call(this, x, y);
+            this.energy=SHIP_ENERGY;
+            this.zindex = 1000;
+            this.xTarget = x;
+            this.yTarget = y;
+            this.offsetLeftEnergy = 25;
+            this.inertia = 14;
+            this.isDead = false;
+        };
+        ship.prototype = Object.create(gameObject.prototype);
+        ship.prototype.drawEnergy=function () {
+            var energyOnBar = ((this.image.width - this.offsetLeftEnergy) / SHIP_ENERGY) * this.energy;
+            var heightImageFrame = this.image.height / this.image.verticalImageFrames + 4;
+            ctx.beginPath();
+            ctx.moveTo(this.x + this.offsetLeftEnergy, this.y + heightImageFrame);
+            ctx.lineTo(this.x + this.image.width, this.y + heightImageFrame);
+            ctx.lineWidth = 2;
+            ctx.strokeStyle = '#000000';
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.moveTo(this.x + this.offsetLeftEnergy, this.y + heightImageFrame);
+            ctx.lineTo(this.x + this.offsetLeftEnergy + energyOnBar, this.y + heightImageFrame);
+            ctx.lineWidth = 2;
+            ctx.strokeStyle = '#00ff00';
+            ctx.stroke();
+        }
+        ship.prototype.draw = function () {
+
+            if (this.image.isLoaded == false || this.isDead) return;
+            this.x = this.x + ((this.xTarget - this.x) / this.inertia);
+            this.y = this.y + ((this.yTarget - this.y) / this.inertia);
+
+            ctx.drawImage(this.image,
+                0, 0 + ((this.currentFrame - 1) * this.getFrameHeight()),
+                this.getFrameWidth(), this.getFrameHeight(),
+                this.x, this.y, this.getFrameWidth(), this.getFrameHeight());
+
+            this.drawEnergy();
+
+            if (myscene.gameTicks % 10 == 0) this.nextImageFrame();
+            var t=this;
+            myscene.gameItems.forEach(
+                    function (item, index) {
+                        if (item instanceof enemy) {
+                            if (collisionArea(item, t) > SHIP_ENEMY_COLLISION) {
+                               item.explode();
+                               t.explode(100,t.x,t.y);
+                            }
+                        }
+                    });
+            
+             
+
+        }
+        ship.prototype.shootToEnemy = function () {
+            if (this.isDead) return;
+
+            if (myscene.countOf(missile) >= MAX_MISSILES) return;
+
+            myscene.gameItems.push(new missile(
+                this.x + this.image.width - 20,
+                this.y + 14));
+                audioshoot.currentTime=0;
+                audioshoot.play();
+           // new Audio('sound/shoot.wav').play();
+
+        }
+        ship.prototype.explode=function(damage,posx,posy){
+            this.energy -= damage;
+            if (this.energy <= 0) {
+                for (var j = 0; j < 6; j++) {
+                    myscene.gameItems.push(new explosion2(posx + getRandom(-20, 20), posy + getRandom(-20, 20)));
+                }
+                this.isDead = true;
+                setTimeout(function(){myscene.started=false;},3000);
+                
+            }
+            else
+                myscene.gameItems.push(new explosion(posx, posy));
+        }
+
+       
+
+
+
+
+
+        function background(x, y) {
+            gameObject.call(this, x, y);
+            this.zindex = 0;
+            this.x = 0;
+            this.draw = function () {
+
+                if (!this.image.isLoaded == true) return;
+                this.x += BACKGROUND_SPEED;
+                ctx.drawImage(this.image, this.x, 0, this.image.width, canvas.height);
+                var rightLimit = this.x + this.image.width;
+
+                while (rightLimit < canvas.width) {
+                    ctx.drawImage(this.image, rightLimit + 1, 0, this.image.width, canvas.height);
+                    rightLimit += this.image.width;
+                }
+                if (this.x + this.image.width < 0) this.x = 0;
+            }
+        }
+        background.prototype = Object.create(gameObject.prototype);
+
+
+
+        function cloud(x, y) {
+            gameObject.call(this, x, y);
+            this.speedX = getRandom(1, 4);;
+            this.zindex = this.speedX; //pos 1-4
+            this.x = canvas.width;
+            this.y = this.speedX * 10;
+
+            this.draw = function () {
+                if (this.image.isLoaded == false) return;
+                this.x -= this.speedX;
+                var scale = 4 / this.speedX;
+                if (this.x + this.image.width / scale < 0) {
+                    this.tbd = true;
+                    return;
+                }
+                ctx.drawImage(this.image, this.x, this.y, this.image.width / scale, this.image.height / scale);
+            };
+        }
+        cloud.prototype = Object.create(gameObject.prototype);
+
+
+        function missile(x, y) {
+            gameObject.call(this, x, y);
+            
+            this.zindex = 1000;
+            this.draw = function () {
+
+                if (!this.image.isLoaded) return;
+
+                this.x += MISSILE_SPEED;
+                if (isTbd(this)) return;
+                var t = this;
+                myscene.gameItems.forEach(
+                    function (item, index) {
+                        if (item instanceof enemy) {
+                            if (collisionArea(item, t) > ENEMY_MISSILE_COLLISION) {
+                               
+                                t.tbd = true;
+                                item.explode();
+                            }
+                        }
+                    });
+
+                ctx.drawImage(this.image, this.x, this.y);
+            }
+        }
+        missile.prototype = Object.create(gameObject.prototype);
+
+        function enemyPattern(enemy) {
+            var accessPoint;
+            var patternStartPoint = new point(550, 100);
+            var variantx = 1;
+            var varianty = 1;
+            var waveN = enemy.wave % 6;
+
+            switch (waveN) {
+                case 1:
+                    accessPoint = new point(canvas.width, canvas.height);
+                    break;
+                case 2:
+                    accessPoint = new point(canvas.width, 0);
+                    variantx = 2;
+                    break;
+                case 3:
+                    accessPoint = new point(0, 0);
+                    variantx = 3;
+                    break;
+                case 4:
+                    accessPoint = new point(canvas.height, 0);
+                    variantx = 3;
+                    varianty = 2;
+                    break;
+                case 5:
+                    accessPoint = new point(0, canvas.height);
+                    variantx = 2;
+                    varianty = 3;
+                    break;
+                case 0:
+                    accessPoint = new point(canvas.width, canvas.height);
+                    variantx = 4;
+                    varianty = 0.8;
+                    break;
+            }
+            if (enemy.x == -1 && enemy.y == -1) {
+                enemy.x = accessPoint.x;
+                enemy.y = accessPoint.y;
+            }
+            if (!enemy.patternStarted)
+                enemy.patternStarted = (Math.abs(enemy.x - patternStartPoint.x) < 3 && Math.abs(enemy.y - patternStartPoint.y) < 3);
+            if (enemy.patternStarted) {
+                enemy.patternTick += 3;
+                enemy.x += enemy.speedX * Math.cos(ToRadians(enemy.patternTick) / variantx);
+                enemy.y += enemy.speedY * Math.sin(ToRadians(enemy.patternTick) / varianty);
+            }
+            else {
+                //approaching pattern start point
+                var a = getAngleRadians(new point(enemy.x, enemy.y), new point(patternStartPoint.x, patternStartPoint.y));
+                enemy.x = enemy.x + (enemy.speedX * Math.cos(a));
+                enemy.y = enemy.y + (enemy.speedY * Math.sin(a));
+            }
+        }
+
+        function enemy(x, y, wave) {
+            gameObject.call(this, x, y, wave);
+            this.x = -1;
+            this.y = -1;
+            this.zindex = 1000;
+            this.patternTick = 0;
+            this.currentFrame = 1;
+            
+            this.enemyBombs = [];
+            this.speedX = 6;
+            this.speedY = 3;
+         
+            this.bombRate = INITIAL_BOMB_RATE - wave;
+            this.wave = wave;
+
+            this.draw = function () {
+                if (!this.image.isLoaded) return;
+                enemyPattern(this);
+
+                ctx.drawImage(this.image,
+                    0, 0 + ((this.currentFrame - 1) * this.getFrameHeight()),
+                    this.getFrameWidth(), this.getFrameHeight(),
+                    this.x, this.y, this.getFrameWidth(), this.getFrameHeight());
+
+                if (myscene.gameTicks % 10 == 0) this.nextImageFrame();
+                this.shootToShip();
+                purgeTbd(this.enemyBombs);
+                for (var k = 0; k < this.enemyBombs.length; k++) {
+                    this.enemyBombs[k].draw();
+                }
+            }
+            this.explode=function()
+            {
+                this.tbd=true;
+                myscene.score += 100;
+                myscene.gameItems.push(new explosion2(this.x, this.y));
+            }
+
+            this.shootToShip = function () {
+                if (getRandom(1, 1000) > this.bombRate) {
+                    var a = new enemyBomb(
+                        this.x, this.y,
+                        myscene.ship.x + myscene.ship.image.width / 2, myscene.ship.y
+                    );
+                    this.enemyBombs.push(a);
+                }
+            }
+        }
+        enemy.prototype = Object.create(gameObject.prototype);
+
+
+        function enemyBomb(posX, posY, targetX, targetY) {
+            gameObject.call(this, posX, posY);
+
+            this.targetX = targetX;
+            this.targetY = targetY;
+            this.speed = BOMB_SPEED;
+            
+            var a = getAngleRadians(new point(this.x, this.y), new point(this.targetX, this.targetY));
+            this.stepX = this.speed * Math.cos(a);
+            this.stepY = this.speed * Math.sin(a);
+
+            //new Audio("sound/bomb.wav").play();
+            audiobomb.play();
+            this.draw = function () {
+                if (!this.image.isLoaded) return;
+                // uncomment if you want bombs to follow you ;)
+                // var a = getAngleRadians(new point(this.x, this.y), new point(myscene.ship.x, myscene.ship.y));
+                // this.stepX = this.speed * Math.cos(a);
+                // this.stepY = this.speed * Math.sin(a);
+
+                this.x += this.stepX;
+                this.y += this.stepY;
+                if (isTbd(this)) return;
+
+                ctx.drawImage(this.image, 0, ((this.currentFrame - 1) * this.getFrameHeight()), this.getFrameWidth(), this.getFrameHeight(),
+                 this.x, this.y,  this.getFrameWidth(), this.getFrameHeight());
+
+                if (!myscene.ship.isDead && collisionArea(this, myscene.ship) > SHIP_BOMB_COLLISION) {
+                    this.tbd = true;
+                   myscene.ship.explode(10,this.x,this.y);
+                }
+                if (myscene.gameTicks % 4 == 0) this.nextImageFrame();
+            }
+        }
+        enemyBomb.prototype = Object.create(gameObject.prototype);
+
+        function explosion(x, y) {
+            gameObject.call(this, x, y);
+            
+            this.zindex = 1000;
+            //new Audio("sound/expl1.mp3").play();
+            audioexpl1.currentTime = 0;
+            audioexpl1.play();
+            this.draw = function () {
+                if (!this.image.isLoaded) return;
+                ctx.drawImage(this.image,
+                    0 + ((this.currentFrame - 1) * this.getFrameWidth()), 0,
+                    this.getFrameWidth(), this.getFrameHeight(),
+                    this.x - 32, this.y - 32, this.getFrameWidth(), this.getFrameHeight());
+
+                this.nextImageFrame(true);
+            }
+        }
+        explosion.prototype = Object.create(gameObject.prototype);
+
+        function explosion2(x, y) {//large explosion
+            //new Audio("sound/expl1.mp3").play();
+            audioexpl1.currentTime = 0;
+            audioexpl1.play();
+            gameObject.call(this, x, y);
+          
+            this.zindex = 1000;
+            this.draw = function () {
+                if (!this.image.isLoaded) return;
+            
+                
+                ctx.drawImage(this.image,
+                0 + ((this.currentFrame - 1) * this.getFrameWidth()), 0,
+                this.getFrameWidth(), this.getFrameHeight(),
+                this.x - 32, this.y - 32, this.getFrameWidth(), this.getFrameHeight());
+
+                if (myscene.gameTicks % 3 == 0) this.nextImageFrame(true);
+            }
+        }
+        explosion2.prototype = Object.create(gameObject.prototype);
+
+        function message(content) {
+            this.fontSize = 5;
+            this.step = 3;
+            this.zindex = 10000;
+
+            this.draw = function () {
+                if (this.fontSize <= 0) {
+                    this.tbd = true;
+                    return;
+                }
+                this.fontSize += this.step;
+                if (this.fontSize >= 100) this.step = -this.step;
+                ctx.textAlign = "center";
+                ctx.fillText(content, canvas.width / 2, canvas.height / 2);
+                ctx.font = this.fontSize + 'pt Impact';
+                var gr = ctx.createLinearGradient(0, 0, 0, canvas.height);
+                gr.addColorStop(0, 'black');
+                gr.addColorStop(0.6, '#f00');
+
+                ctx.fillStyle = gr;
+            }
+        }
+
+
+        function point(x, y) {
+            this.x = x;
+            this.y = y;
+        }
+
+        //utilities-------------------------------------------------------
+		
+		//sort array by zindex property
+        function compareZindex(a, b) {
+            if (a.zindex < b.zindex)
+                return -1;
+            else
+                return 1;
+        }
+		
+		// mark as tbd an object gone out of canvas
+        function isTbd(ob) {
+            if (ob.x + ob.image.width < 0 || ob.x > canvas.width || ob.y + ob.image.height < 0 || ob.y > canvas.height) {
+                ob.tbd = true;
+                return true;
+            }
+            else return false;
+        }
+		
+        // delete array elements marked with tbd property
+		function purgeTbd(arr) {
+            for (var i = arr.length - 1; i >= 0; i--) {
+                if (arr[i].tbd) {
+                    arr.splice(i, 1);
+                }
+            }
+        }
+		
+        //convert degrees in radians
+		function ToRadians(degrees) {
+            return degrees * Math.PI / 180;
+        };
+		
+		//get random null
+        function getRandom(min, max) {
+            return Math.floor((Math.random() * max) + min);
+        }
+
+		//return direction between two points in radians
+        function getAngleRadians(p1, p2) {
+            var angleRadians = Math.atan2(p2.y - p1.y, p2.x - p1.x);
+            return angleRadians;
+        }
+
+        //return number of pixel in overlap
+        function collisionArea(ob1, ob2) {
+
+            var overX = Math.max(0, Math.min(ob1.x + ob1.getFrameWidth(), ob2.x + ob2.getFrameWidth()) - Math.max(ob1.x, ob2.x))
+            var overY = Math.max(0, Math.min(ob1.y + ob1.getFrameHeight(), ob2.y + ob2.getFrameHeight()) - Math.max(ob1.y, ob2.y));
+
+            return overX * overY;
+        }
+		 function getMousePos(canvas, evt) {
+            var rect = canvas.getBoundingClientRect();
+            return {
+                x: evt.clientX - rect.left,
+                y: evt.clientY - rect.top
+            };
+        }
+        function initMobile()    
+		{
+			if (canvas.requestFullscreen) canvas.requestFullscreen();
+			if (canvas.webkitRequestFullscreen) canvas.webkitRequestFullscreen(canvas.ALLOW_KEYBOARD_INPUT);
+			if (canvas.mozRequestFullScreen) canvas.mozRequestFullScreen();
+			if (canvas.msRequestFullscreen) canvas.msRequestFullscreen();
+			 
+			audioexpl1.play();
+			audioexpl1.pause();
+			audiobomb.play();
+			audiobomb.pause();
+			audioshoot.play();
+			audioshoot.pause();
+		}
+
+		// script start here --------------------------------------------------------
+		var canvas = document.getElementById("canvas");
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        var audioshoot=document.getElementById("shoot");
+		var audiobomb=document.getElementById("bomb"); 
+       	var audioexpl1=document.getElementById("expl1"); 
+        canvas.addEventListener('click', function (evt) {
+           
+            if (! myscene.started)
+            {
+                myscene.started=true;
+                myscene.ship.isDead=false;
+                myscene.wave=0;
+                myscene.score=0;
+                myscene.ship.energy=SHIP_ENERGY;
+                for (var i=myscene.gameItems.length-1;i>=0;i--)
+                {
+                    if (myscene.gameItems[i] instanceof enemy) myscene.gameItems.splice(i,1);
+                }
+            }
+            else  
+                myscene.ship.shootToEnemy();
+           
+           
+        });
+        canvas.addEventListener('touchmove', function (e) {
+		  
+		   if(e.changedTouches[0].pageX>canvas.width/2)return;
+		    myscene.ship.xTarget =e.changedTouches[0].pageX+60;
+            myscene.ship.yTarget = e.changedTouches[0].pageY;
+        });
+		 
+		  
+		 
+		 canvas.addEventListener('touchend', function (e) {
+		 
+					 if (!myscene.started) {
+						 initMobile(); 
+						 myscene.started=true;
+                         myscene.ship.inertia=1;
+                         myscene.ship.isDead=false;
+                            myscene.wave=0;
+                            myscene.score=0;
+                            myscene.ship.energy=SHIP_ENERGY;
+                            for (var i=myscene.gameItems.length-1;i>=0;i--)
+                            {
+                                if (myscene.gameItems[i] instanceof enemy) myscene.gameItems.splice(i,1);
+                            }
+					 }
+                    else myscene.ship.shootToEnemy();
+                       
+        });
+        canvas.addEventListener('mousemove', function (evt) {
+            var mousePos = getMousePos(canvas, evt);
+            myscene.ship.xTarget = mousePos.x;
+            myscene.ship.yTarget = mousePos.y;
+        });
+		canvas.addEventListener('keyup', function (e) {
+            if ((e.keyCode || e.which) == 32) {
+						myscene.paused=! myscene.paused;
+					}
+        });
+        canvas.focus();
+
+        var ctx = canvas.getContext("2d");
+       
+		var images=new imagesRepo();
+		var myscene = new scene();
+        myscene.init();
+
+       
+		
+		//have fun
+		
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,59 @@
+como usar git
+
+1- Creas el repo en github.com
+
+2- clonas el repo:
+    - git clone https://github.com/pilichanampe/repo_tp2-homebanking.git
+	
+3- Entrás al directorio del repo:
+	- cd nombre_del_repo
+
+4- Hacés un DIR para ver que hay.
+	Te vas a dar cuenta que estás en el repo si ves el README.MD.
+	Para otro control, hacé un cat README.md.
+	Eso te debería mostrar el nombre del repo que quisiste clonar.
+		
+5- Creás un nuevo branch:
+	git checkout -b nombre_branch
+
+6- Te fijás que realmente te hayas cambiado al branch que creaste:
+	git branch
+
+7- Una vez creado, empezás a trabajar.
+	NOTA: Si te olvidaste de crear el branch y ya hiciste cambios no pasa nada, siempre y cuando NO HAGAS el commit.
+	Podés crear el branch, moverte al branch y hacer el commit a ESE branch.
+	Evitá hacer commits al master
+
+8- Fijate que cosas cambiaste:
+	git status
+	git status -u    ---> Te va a mostrar todos los archivos que agregaste dentro de esa carpeta.
+
+9- Una vez creado el branch, modificás algunas cosas, las añadís y hacés el commit:
+	- git add -A
+	- git commit -m "mensaje descriptivo del commit"
+	
+10- Finalmente, pushéas el cambio:
+		git push -u origin nombre_branch
+
+		
+11- Ahora, si querés seguir editando las cosas, continúas desde el paso 6, salvo que por X motivo necesités otro branch.
+
+12- Cuando finalizás tu desarrollo, tenés que mergearlos. Para eso, vas a github.com
+
+13- En GitHub, buscás tu repo, elegís tu nuevo branch, vas a donde dice "compare & pull request"
+
+14- Te fijás que la flechita indique que vas a pasar las cosas de tu branch al master
+
+15- Si todo está bien, debería decirte que el branch es "Able to merge"
+
+16- Ponés "Create pull request"???
+
+17- Le das a "Merge Pull Request"
+
+18- Confirm Merge
+
+19- Le das a "Delete branch", para que no esté al pedo, total, ya la mergiaste.
+
+20- Finalmente, en tu repo local (la carpeta de la computadora) te cambias al master y lo actualizás, para que traiga el cambio del merge que hiciste en github.
+	git checkout master
+	git pull

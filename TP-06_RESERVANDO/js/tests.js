@@ -75,10 +75,36 @@ describe('Test de function calificar()', function(){
 
 //test de function buscarRestaurante(id)
 describe('Test de function buscarRestaurante(id)', function(){
-    it('Busca el id que se pasa por parámetro en el listado', function(){
-            listado.restaurantes;
-                     
-            expect(listado.buscarRestaurante(8)).to.be.equal(7);
+    it('Busca el id que se pasa por parámetro en el listado.', function(){
+                               
+            expect(listado.buscarRestaurante(8).id).to.be.equal(8);
+    });
+
+    it('Al pasar un id inexistente, sigue funcionando correctamente.', function(){
+        listado.restaurantes;
+                 
+        expect(listado.buscarRestaurante(60)).to.be.equal('No se ha encontrado ningún restaurant');
+    });
+});
+
+//test function obtenerRestaurantes()
+describe('Test de function obtenerRestaurantes()', function(){
+    it('Funciona correctamente al utilizar los tres filtros.', function(){
+                               
+            expect(listado.obtenerRestaurantes('Asiática', 'Nueva York', '15:30').length).to.be.equal(1);
+    });
+
+    it('Funciona correctamente sin pasar ningún filtro.', function(){
+                         
+        expect(listado.obtenerRestaurantes(null, null, null).length).to.be.equal(24);
+
+    });
+
+    it('Funciona correctamente pasando un solo filtro', function(){
+                         
+        expect(listado.obtenerRestaurantes(null, 'Berlín', null).length).to.be.equal(5);
+        expect(listado.obtenerRestaurantes('Desayuno', null, null).length).to.be.equal(4);
+        expect(listado.obtenerRestaurantes(null, null, '13:30').length).to.be.equal(1);
     });
 });
 

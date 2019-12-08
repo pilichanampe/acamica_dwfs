@@ -1,3 +1,4 @@
+//test del proyecto Reservando
 let expect = chai.expect;
 
 //test function reservarHorario(horario)

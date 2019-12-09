@@ -1,4 +1,3 @@
-//test del proyecto Reservando
 let expect = chai.expect;
 
 //test function reservarHorario(horario)
@@ -22,7 +21,7 @@ describe('Test de function reservarHorario(horario)', function(){
 
     })
     it('El arreglo se mantiene igual aunque no se le pase parámetro.', function(){
-        const testHorarios = listado.restaurantes[2];
+            const testHorarios = listado.restaurantes[2];
             testHorarios.reservarHorario();
 
             expect(testHorarios.horarios[0]).to.be.equal('11:30');
@@ -109,7 +108,31 @@ describe('Test de function obtenerRestaurantes()', function(){
     });
 });
 
+//test del objeto precioBase().
+describe('Test de function precioBase()', function(){
+    it('Un restaurante calcula correctamente su precio base.', function(){
+        expect(listadoDeReservas[0].calcularPrecioBase()).to.be.equal(2800);
+        expect(listadoDeReservas[1].calcularPrecioBase()).to.be.equal(300);
+    });
+});
 
+//test de function calcularAdicionales().
+describe('Test de function calcularAdicionales()', function(){
+    it('Un restaurante calcula correctamente su precio total.', function(){
+            expect(listadoDeReservas[0].calcularAdicionales()).to.be.equal(2800);
+            
+    });
+})
+//test de function precioFinal().
+describe('Test de function precioFinal()', function(){
+    it('Un restaurante calcula correctamente su precio total.', function(){
+            expect(listadoDeReservas[0].calcularPrecioFinal()).to.be.equal(2310);
+            expect(listadoDeReservas[1].calcularPrecioFinal).to.be.equal(100);
+    });
+})
+
+
+  
 
 
 

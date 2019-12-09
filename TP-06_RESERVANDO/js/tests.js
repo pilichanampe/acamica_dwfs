@@ -118,16 +118,22 @@ describe('Test de function precioBase()', function(){
 
 //test de function calcularAdicionales().
 describe('Test de function calcularAdicionales()', function(){
-    it('Un restaurante calcula correctamente su precio total.', function(){
-            expect(listadoDeReservas[0].calcularAdicionales()).to.be.equal(2800);
+    it('Un restaurante calcula correctamente su adicional por fin de semana.', function(){
+            expect(listadoDeReservas[0].calcularAdicionales()).to.be.equal(280);
             
     });
+    it('Un restaurante calcula correctamente su adicional por franja horaria.', function(){
+        expect(listadoDeReservas[0].calcularAdicionales()).to.be.equal(280);
+        expect(listadoDeReservas[1].calcularAdicionales()).to.be.equal(15);
+        
+});
+
 })
 //test de function precioFinal().
 describe('Test de function precioFinal()', function(){
     it('Un restaurante calcula correctamente su precio total.', function(){
-            expect(listadoDeReservas[0].calcularPrecioFinal()).to.be.equal(2310);
-            expect(listadoDeReservas[1].calcularPrecioFinal).to.be.equal(100);
+            expect(listadoDeReservas[0].calcularPrecioFinal()).to.be.equal(2450);
+            expect(listadoDeReservas[1].calcularPrecioFinal).to.be.equal(115);  
     });
 })
 

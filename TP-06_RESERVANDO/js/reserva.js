@@ -10,42 +10,63 @@ Reserva.prototype.calcularPrecioBase = function() {
     return precioBase;
 }
 
-/*Reserva.prototype.calcularPrecioFinal = function() {
-    precioTotal = this.precioBase + this.adicionales - this.descuentos;
-    return precioTotal;
-}*/
-
-/*Reserva.prototype.calcularAdicionales = function() {
-    let adicionales = 0;
-    let adicDia = this.fechaHorario.getHours() === 13;
-    let adicNoche = this.fechaHorario.getHours() === 20;
-    if(adicDia || adicNoche) {
-        adicionales = this.calcularPrecioBase * .05;
-        
-        
-         
-    }
-   
-    
-}*/
 Reserva.prototype.calcularAdicionales = function(){
-    var adicionales = 0;
-    if(this.fechaHora.getHours() >= 12 && this.fechaHora.getHours() <= 13 || this.fechaHora.getHours() >= 19 && this.fechaHora.getHours() <= 20) {
-        adicionales = Math.round(this.calcularPrecioBase() * 5 ) / 100;
-    } else if (this.fechaHora.getDay() >= 4){
-        adicionales = Math.round(this.calcularPrecioBase() * 10) / 100;
+    let hora = this.fechaHora.getHours();
+    let dia = this.fechaHora.getDay();
+    let adicionales = 0;
+
+    if(hora == 13 || hora == 20) {
+        adicionales = Math.round(this.calcularPrecioBase() * .05);
+    } else if (dia == 0 || dia == 5 || dia == 6 ){
+        adicionales = Math.round(this.calcularPrecioBase() * .10);
     }  
 
     return adicionales;
 }
 
+Reserva.prototype.descXGrupo = function(){
+    let descuento = 0;
+    let personas = this.cantPersonas;
+    //switch que calcula el descuento según la cantidad de personas.
+    
+    if(personas >= 4 && personas <= 6) {
+        descuento = this.calcularPrecioBase() * .05;
+    } else if (personas >= 7 && personas <= 8) {
+        descuento = this.calcularPrecioBase() * .10;
+    } else if (personas > 8) {
+        descuento = this.calcularPrecioBase() * .15;
+    }
+    return descuento;
+}
+
+Reserva.prototype.descXCodigo = function(){
+    let desCodigo = this.descuento;
+    let des15 = 'DES15';
+    let des200 = 'DES200';
+    let des1 = 'DES1';
+    let descuento = 0;
+
+    if(desCodigo === des15) {
+        descuento = this.calcularPrecioBase() * .15;
+    } else if (desCodigo === des200) {
+        descuento = 200;
+    } else if (desCodigo === des1) {
+        descuento = this.precioPersona;
+    }
+    return descuento;
+}
+
 Reserva.prototype.calcularPrecioFinal = function() {
-    return precioFinal = this.calcularPrecioBase() - this.calcularDescuentos() + this.calcularAdicionales();
+    return precioFinal = this.calcularPrecioBase() + this.calcularAdicionales() - this.descXGrupo() - this.descXCodigo();
 }
 
 var listadoDeReservas = [
     new Reserva (new Date(2019, 7, 24, 11, 00), 8, 350, "DES1"),
-    new Reserva (new Date(2018, 7, 27, 14, 100), 2, 150, "DES200")
+    new Reserva (new Date(2019, 7, 27, 13, 30), 2, 150, "DES200"),
+    new Reserva (new Date(2019, 7, 24, 11, 00), 8, 350, "DES1"),
+    new Reserva (new Date(2019, 5, 25, 13, 30), 2, 150, "DES200"),
+    new Reserva (new Date(2019, 7, 24, 11, 00), 8, 350, "DES200"),
+    new Reserva (new Date(2020, 7, 27, 14, 100), 9, 150, "DES1")
 ];
 
 var reserva = new Reserva (listadoDeReservas);

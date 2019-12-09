@@ -40,17 +40,13 @@ Reserva.prototype.descXGrupo = function(){
 }
 
 Reserva.prototype.descXCodigo = function(){
-    let desCodigo = this.descuento;
-    let des15 = 'DES15';
-    let des200 = 'DES200';
-    let des1 = 'DES1';
     let descuento = 0;
 
-    if(desCodigo === des15) {
+    if(this.descuento === 'DES15') {
         descuento = this.calcularPrecioBase() * .15;
-    } else if (desCodigo === des200) {
+    } else if (this.descuento === 'DES200') {
         descuento = 200;
-    } else if (desCodigo === des1) {
+    } else if (this.descuento === 'DES1') {
         descuento = this.precioPersona;
     }
     return descuento;

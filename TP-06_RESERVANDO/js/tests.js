@@ -133,7 +133,9 @@ describe('Test de function calcularAdicionales()', function(){
 describe('Test de function precioFinal()', function(){
     it('Un restaurante calcula correctamente su precio total.', function(){
             expect(listadoDeReservas[0].calcularPrecioFinal()).to.be.equal(2450);
-            expect(listadoDeReservas[1].calcularPrecioFinal).to.be.equal(115);  
+            expect(listadoDeReservas[1].calcularPrecioFinal()).to.be.equal(115);
+            expect(listadoDeReservas[5].calcularPrecioFinal()).to.be.equal(997.5);
+             
     });
 })
 

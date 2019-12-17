@@ -5,7 +5,7 @@ var VistaAdministrador = function(modelo, controlador, elementos) {
   this.modelo = modelo;
   this.controlador = controlador;
   this.elementos = elementos;
-  var contexto = this;
+  var contexto = this; 
 
   // suscripción de observadores
   this.modelo.preguntaAgregada.suscribir(function() {
@@ -23,7 +23,7 @@ VistaAdministrador.prototype = {
 
   construirElementoPregunta: function(pregunta){
     var contexto = this;
-    var nuevoItem;
+    var nuevoItem = $("<li class='list-group-item' id='"+`${pregunta.id}`+"'>"+`${pregunta.textoPregunta}`+"</li>");
     //completar
     //asignar a nuevoitem un elemento li con clase "list-group-item", id "pregunta.id" y texto "pregunta.textoPregunta"
     var interiorItem = $('.d-flex');

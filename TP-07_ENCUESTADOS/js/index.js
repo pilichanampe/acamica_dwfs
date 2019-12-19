@@ -18,3 +18,13 @@ var vistaUsuario = new VistaUsuario(modelo, new Controlador(modelo), {
   'graficosDeTorta' : $('#graficosDeTorta'),
 });
 vistaUsuario.inicializar();
+
+$(document).ready(function(){
+  var arrayPreguntas = localStorage.getItem('array');
+  if(typeof arrayPreguntas ==  "string"){
+  modelo.preguntas= JSON.parse(arrayPreguntas)
+  modelo.preguntaAgregada.notificar();
+  modelo.aplicacionIniciada.notificar();
+
+  }
+});

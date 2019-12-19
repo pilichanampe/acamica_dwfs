@@ -10,6 +10,12 @@ var VistaUsuario = function(modelo, controlador, elementos) {
   //suscripcion a eventos del modelo
   this.modelo.preguntaAgregada.suscribir(function() {
     contexto.reconstruirLista();
+    this.modelo.preguntaVotada.suscribir(function(){
+      contexto.reconstruirGrafico();
+    });
+    this.modelo.aplicacionIniciada.suscribir(function(){
+      contexto.reconstruirGrafico()
+    });
   });
 };
 
@@ -51,6 +57,8 @@ VistaUsuario.prototype = {
     preguntas.forEach(function(clave){
       //completar
       //agregar a listaPreguntas un elemento div con valor "clave.textoPregunta", texto "clave.textoPregunta", id "clave.id"
+      nuevoElemento = $("<div id="+`${clave.id}`+" value="+`${clave.textoPregunta}`+">"+`${clave.textoPregunta.toUpperCase()}`+"</div>");
+      listaPreguntas.append(nuevoElemento);
       var respuestas = clave.cantidadPorRespuesta;
       contexto.mostrarRespuestas(listaPreguntas,respuestas, clave);
     })

@@ -51,27 +51,40 @@ VistaAdministrador.prototype = {
     var e = this.elementos;
     var contexto = this;
 
-    //asociacion de eventos a boton
     e.botonAgregarPregunta.click(function() {
       var value = e.pregunta.val();
       var respuestas = [];
 
       $('[name="option[]"]').each(function() {
-        var textoInput = $(this).val();
-        respuesta = {textoRespuesta:textoInput, cantidad:0 };
-        respuestas.push(respuesta);//completar
+        var textoInput = $(this).val(),
+            respuesta={textoRespuesta:textoInput, cantidad:0 }
+        respuestas.push(respuesta);
       })
       contexto.limpiarFormulario();
       contexto.controlador.agregarPregunta(value, respuestas);
     });
-
-    //e.botonBorrarRespuesta.click(function() {
-     //var id = parseInt($('.list-group-item.active').attr('id'));
-    //});
-    //asociar el resto de los botones a eventos
+    e.botonBorrarPregunta.click(function(){
+      var id = parseInt($('.list-group-item.active').attr('id'));
+      contexto.controlador.borrarPregunta(id);
+    })
+    e.botonEditarPregunta.click(function(){
+      var id =  parseInt($('.list-group-item.active').attr('id'));
+      contexto.controlador.editarPregunta(id);
+      console.log(id)
+     //asociar el resto de los botones a eventos
+    });
+    e.borrarTodo.click(function(){
+      contexto.controlador.borrarTodo();
+    })
   },
+  
+
 
   limpiarFormulario: function(){
     $('.form-group.answer.has-feedback.has-success').remove();
   },
 };
+
+
+   
+  

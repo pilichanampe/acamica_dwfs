@@ -8,6 +8,9 @@ var Modelo = function() {
   //inicializacion de eventos
   this.preguntaAgregada = new Evento(this);
   this.preguntaEliminada = new Evento(this);
+  this.preguntaEditada = new Evento(this);
+  this.preguntaVotada = new Evento(this);
+  this.aplicacionIniciada = new Evento(this);
 };
 
 Modelo.prototype = { 
@@ -34,12 +37,6 @@ Modelo.prototype = {
   guardar: function(){
     localStorage.setItem('array', JSON.stringify(this.preguntas));
   },
-
-  /*agregarRespuesta: function(respuesta, cantVotos) {
-    var idPregunta = this.agregarPregunta.id;
-    var nuevaRespuesta = {'textoRespuesta': respuesta, 'cantidad': cantVotos};
-    this.respuestaAgregada.notificar();
-  },*/
 
   eliminarPregunta: function() {
 

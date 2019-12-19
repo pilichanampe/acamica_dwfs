@@ -2,7 +2,7 @@
  * Vista usuario
  */
 var VistaUsuario = function(modelo, controlador, elementos) {
-  this.modelo = modelo;
+  this.modelo = modelo; 
   this.controlador = controlador;
   this.elementos = elementos;
   var contexto = this;

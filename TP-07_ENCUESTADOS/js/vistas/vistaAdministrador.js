@@ -18,6 +18,8 @@ VistaAdministrador.prototype = {
   //lista
   inicializar: function() {
     //llamar a los metodos para reconstruir la lista, configurar botones y validar formularios
+    this.reconstruirLista();
+    this.configuracionDeBotones();
     validacionDeFormulario();
   },
 
@@ -55,11 +57,17 @@ VistaAdministrador.prototype = {
       var respuestas = [];
 
       $('[name="option[]"]').each(function() {
-        //completar
+        var textoInput = $(this).val();
+        respuesta = {textoRespuesta:textoInput, cantidad:0 };
+        respuestas.push(respuesta);//completar
       })
       contexto.limpiarFormulario();
       contexto.controlador.agregarPregunta(value, respuestas);
     });
+
+    //e.botonBorrarRespuesta.click(function() {
+     //var id = parseInt($('.list-group-item.active').attr('id'));
+    //});
     //asociar el resto de los botones a eventos
   },
 

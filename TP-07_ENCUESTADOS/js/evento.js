@@ -1,7 +1,7 @@
 //Evento
 var Evento = function(emisor) {
   this.sujeto = emisor;
-  this.observadores = [];
+  this.observadores = []; 
 };
 
 Evento.prototype = {

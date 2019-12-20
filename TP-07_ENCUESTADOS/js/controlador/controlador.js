@@ -22,28 +22,28 @@ Controlador.prototype = {
 };
 
 Controlador.prototype.borrarPregunta = function(id){
-  if( isNaN(id)==false){
-  this.modelo.borrarPregunta(id);
+  if(isNaN(id) == false){
+    this.modelo.borrarPregunta(id);
   }
   else{
-    this.alertSeleccionInvalida()
+    this.alertSeleccionInvalida();
   }
 };
 
 Controlador.prototype.agregarVotos = function(nombrePregunta, respuestaSeleccionada){
-  this.modelo.sumarVoto(nombrePregunta, respuestaSeleccionada)
+  this.modelo.sumarVoto(nombrePregunta, respuestaSeleccionada);
 };
 
 Controlador.prototype.editarPregunta = function(id){
-  if( isNaN(id)==false){
+  if( isNaN(id) == false){
   var texto = prompt("Escriba su pregunta");
-    if((texto !== NaN) && (texto !== undefined)&&(texto !== null)&& (texto.length>0)){
+    if((texto !== NaN) && (texto !== undefined) && (texto !== null) && (texto.length>0)){
       this.modelo.editarPregunta(id, texto);
     }
     else{
       swal({
         title: "¡Hey!",
-        text: "!No has escrito la pregunta",
+        text: "!No has escrito la pregunta!",
         icon: "warning",
         button: true,
         dangerMode: true,

@@ -26,20 +26,23 @@
     <div class="container">
       <h2>Votá las respuestas</h2>
 
-      <div class="form-box">
-        <div id="elecciones">
-          <!--Nombre del encuestado-->
-          
-          <!--Respuesta del encuestado-->
-          <div class="form-group">
-            <label>Nombre</label>
-            <input id="nombreUsuario" class="line-input" type="text">
-          </div>
+      <form class="formularioRespuesta">
+        <div class="form-box">
+          <div id="elecciones">
+            <!--Nombre del encuestado-->
+            
+            <!--Respuesta del encuestado-->
+            <div class="form-group">
+              <label>Nombre</label>
+              <input id="nombreUsuario" class="line-input" type="text">
+            </div>
 
-          <!--Primer valor-->
-          <div id="preguntas"></div>
-        </div>
-      </div>
+            <!--Primer valor-->
+            <div id="preguntas"></div>	
+        </div>					 
+      </form>					
+    </div>
+      
 
       <button id="agregarBoton" class="main-button" name="agregar">Enviar respuestas</button>
 
@@ -50,6 +53,7 @@
     </div>
 
     <!--Script para grafico-->
+    <script src = "https://unpkg.com/sweetalert/dist/sweetalert.min.js "></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/lib/formValidation.js"></script>

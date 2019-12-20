@@ -11,6 +11,12 @@ var VistaAdministrador = function(modelo, controlador, elementos) {
   this.modelo.preguntaAgregada.suscribir(function() {
     contexto.reconstruirLista();
   });
+  this.modelo.preguntaEliminada.suscribir(function() {
+    contexto.reconstruirLista(); 
+  });
+  this.modelo.preguntaEditada.suscribir(function() {
+    contexto.reconstruirLista();  
+  });
 };
 
 
@@ -42,7 +48,7 @@ VistaAdministrador.prototype = {
     var lista = this.elementos.lista;
     lista.html('');
     var preguntas = this.modelo.preguntas;
-    for (var i=0;i<preguntas.length;++i){
+    for (var i=0; i < preguntas.length; i++){
       lista.append(this.construirElementoPregunta(preguntas[i]));
     }
   },
@@ -55,34 +61,37 @@ VistaAdministrador.prototype = {
       var value = e.pregunta.val();
       var respuestas = [];
 
+      //asociar el resto de los botones a eventos
       $('[name="option[]"]').each(function() {
-        var textoInput = $(this).val(),
-            respuesta={textoRespuesta:textoInput, cantidad:0 }
+        var textoInput = $(this).val();
+        respuesta = {textoRespuesta: textoInput, cantidad: 0}
         respuestas.push(respuesta);
-      })
+      });
+
       contexto.limpiarFormulario();
       contexto.controlador.agregarPregunta(value, respuestas);
     });
+
     e.botonBorrarPregunta.click(function(){
       var id = parseInt($('.list-group-item.active').attr('id'));
       contexto.controlador.borrarPregunta(id);
-    })
+    });
+
     e.botonEditarPregunta.click(function(){
       var id =  parseInt($('.list-group-item.active').attr('id'));
       contexto.controlador.editarPregunta(id);
       console.log(id)
-     //asociar el resto de los botones a eventos
+     
     });
+
     e.borrarTodo.click(function(){
       contexto.controlador.borrarTodo();
     })
   },
   
-
-
   limpiarFormulario: function(){
     $('.form-group.answer.has-feedback.has-success').remove();
-  },
+  }
 };
 
 

@@ -10,12 +10,12 @@ var VistaUsuario = function(modelo, controlador, elementos) {
   //suscripcion a eventos del modelo
   this.modelo.preguntaAgregada.suscribir(function() {
     contexto.reconstruirLista();
-    this.modelo.preguntaVotada.suscribir(function(){
-      contexto.reconstruirGrafico();
-    });
-    this.modelo.aplicacionIniciada.suscribir(function(){
-      contexto.reconstruirGrafico()
-    });
+  });
+  this.modelo.preguntaVotada.suscribir(function() {
+    contexto.reconstruirGrafico();
+  });
+  this.modelo.aplicacionIniciada.suscribir(function(){
+    contexto.reconstruirGrafico();  
   });
 };
 
@@ -57,7 +57,7 @@ VistaUsuario.prototype = {
     preguntas.forEach(function(clave){
       //completar
       //agregar a listaPreguntas un elemento div con valor "clave.textoPregunta", texto "clave.textoPregunta", id "clave.id"
-      nuevoElemento = $("<div id="+`${clave.id}`+" value="+`${clave.textoPregunta}`+">"+`${clave.textoPregunta.toUpperCase()}`+"</div>");
+      var nuevoElemento = $("<div id="+`${clave.id}`+" value="+`${clave.textoPregunta}`+">"+`${clave.textoPregunta.toUpperCase()}`+"</div>");
       listaPreguntas.append(nuevoElemento);
       var respuestas = clave.cantidadPorRespuesta;
       contexto.mostrarRespuestas(listaPreguntas,respuestas, clave);
@@ -66,28 +66,52 @@ VistaUsuario.prototype = {
 
   //muestra respuestas
   mostrarRespuestas:function(listaPreguntas,respuestas, clave){
-    respuestas.forEach (function(elemento) {
-      listaPreguntas.append($('<input>', {
-        type: 'radio',
-        value: elemento.textoRespuesta,
-        name: clave.id,
-      }));
-      listaPreguntas.append($("<label>", {
-        for: elemento.textoRespuesta,
-        text: elemento.textoRespuesta
-      }));
+    respuestas.forEach (function(elemento,index) {
+      if(index < respuestas.length -1){
+        listaPreguntas.append($('<input>', {
+          type: 'radio',
+          value: elemento.textoRespuesta,
+          name: clave.id,
+        }));
+        listaPreguntas.append($("<label>", {
+          for: elemento.textoRespuesta,
+          text: elemento.textoRespuesta,
+          name: clave.id,
+        }));
+      }
     });
   },
 
   agregarVotos: function(){
     var contexto = this;
     $('#preguntas').find('div').each(function(){
-        var nombrePregunta = $(this).attr('value');
-        var id = $(this).attr('id');
-        var respuestaSeleccionada = $('input[name=' + id + ']:checked').val();
-        $('input[name=' + id + ']').prop('checked',false);
-        contexto.controlador.agregarVoto(nombrePregunta,respuestaSeleccionada);
-      });
+      var nombrePregunta = $(this).text();
+      var id = $(this).attr('id');
+      var respuestaSeleccionada = $('input[name=' + id + ']:checked').val(); 
+      if(typeof respuestaSeleccionada == "string"){
+        if($('#nombreUsuario').val().length !== 0){
+          contexto.controlador.agregarVotos(nombrePregunta,respuestaSeleccionada);
+          $(this).remove();
+          $('input[name=' + id + ']').remove();
+          $('label[name=' + id + ']').remove();
+          swal({
+            title: "!Excelente, " + $('#nombreUsuario').val() +"!",
+            text: "Tu respuesta fue analizada con exito",
+            icon: "success",
+            timer:2500,
+            button: false,
+          })
+        }else{
+          swal({
+            title: "¡Hey!",
+            text: "!No ingresaste ningun nombre!",
+            icon: "warning",
+            button: true,
+            dangerMode: true,
+          })
+        }
+      }
+    })   
   },
 
   dibujarGrafico: function(nombre, respuestas){
@@ -104,8 +128,8 @@ VistaUsuario.prototype = {
       var data = google.visualization.arrayToDataTable(respuestas);
 
       var options = {
-        title: nombre,
-        is3D: true,
+        title: nombre.toUpperCase(),
+        pieHole: 0.4,
       };
       var ubicacionGraficos = contexto.elementos.graficosDeTorta;
       var id = (nombre.replace(/\W/g, '')).split(' ').join('')+'_grafico';

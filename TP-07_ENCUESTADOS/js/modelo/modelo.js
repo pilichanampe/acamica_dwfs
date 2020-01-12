@@ -59,7 +59,7 @@ Modelo.prototype = {
   sumarVoto: function(nombrePregunta, respuestaSeleccionada) {
     var preguntaElegida = this.preguntas.find( pregunta => pregunta.textoPregunta.toUpperCase() == nombrePregunta);
     respuestaElegida = preguntaElegida.cantidadPorRespuesta.find(respuesta => respuesta.textoRespuesta == respuestaSeleccionada);
-    respuestaElegida.cantidadPorRespuesta += 1;
+    respuestaElegida.cantidad += 1;
     this.guardar();
     this.preguntaVotada.notificar();
 

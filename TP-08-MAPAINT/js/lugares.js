@@ -10,7 +10,7 @@ lugaresModulo = (function () {
         los límites de la búsqueda de dirección. El círculo no se debe ver en el mapa. */
   }
 
-    // Inicializo la variable servicioLugares y llamo a la función autocompletar
+    // Inicializo la variable servicioLugares y llamo a la función autocompletar 
   function inicializar () {
     servicioLugares = new google.maps.places.PlacesService(mapa)
     autocompletar()

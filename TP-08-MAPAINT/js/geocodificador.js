@@ -10,7 +10,7 @@ geocodificadorModulo = (function () {
      coordenada: la ubicación de tipo google.maps.LatLng */
   }
 
-    // Inicializo el geocoder que obtiene las corrdenadas a partir de una dirección
+    // Inicializo el geocoder que obtiene las corrdenadas a partir de una dirección 
     // La variable dirección es igual al texto ingresado por el usuario
     // Llama a la función usaDirecciin para agregarla a los listados y mostrarlo en el mapa
   function inicializar () {

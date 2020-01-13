@@ -61,7 +61,7 @@ marcadorModulo = (function () {
     }
   })
 
-    // Cuando cambia el elemento "radio" marco todos lugares cerca
+    // Cuando cambia el elemento "radio" marco todos lugares cerca 
     // del lugar indicado por MiMarcador con el nuevo radio
 
   var rango = document.getElementById('radio')

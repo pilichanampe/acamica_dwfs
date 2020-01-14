@@ -22,7 +22,7 @@ direccionesModulo = (function () {
     }
   }
 
-    // Agrega la dirección en las lista de Lugares Intermedios en caso de que no estén
+    // Agrega la dirección en las lista de Lugares Intermedios en caso de que no estén 
   function agregarDireccionEnLista (direccion, coord) {
     var lugaresIntermedios = document.getElementById('puntosIntermedios')
 

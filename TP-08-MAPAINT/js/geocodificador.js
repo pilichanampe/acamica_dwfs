@@ -34,7 +34,7 @@ geocodificadorModulo = (function () {
     })
 
 //    document.querySelector('#direccion').addEventListener('input', function (e) {
-    document.querySelector('#direccion').addEventListener('change', function (e) {
+    document.querySelector('#direccion').addEventListener('change', function () {
         
         var direccion = document.getElementById('direccion').value
         that.usaDireccion(direccion, direccionesModulo.agregarDireccionYMostrarEnMapa)

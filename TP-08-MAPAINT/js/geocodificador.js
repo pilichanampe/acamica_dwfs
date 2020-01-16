@@ -8,7 +8,7 @@ geocodificadorModulo = (function () {
      y que llame a la función pasada por parámetro con los siguientes parámetros 
      dirección: la dirección pasada por parámetro
      coordenada: la ubicación de tipo google.maps.LatLng */
-     geocodificador.geocode({adress: direccion}, (results, status) => {      
+     geocodificador.geocode({address: direccion}, (results, status) => {      
       if (status === google.maps.GeocoderStatus.OK) {
         var coords = results[0].geometry.location
         funcionALlamar(direccion, coords)      
@@ -30,7 +30,16 @@ geocodificadorModulo = (function () {
                 // code for enter
         var direccion = document.getElementById('direccion').value
         that.usaDireccion(direccion, direccionesModulo.agregarDireccionYMostrarEnMapa)
-      }
+      }    
+    })
+
+//    document.querySelector('#direccion').addEventListener('input', function (e) {
+    document.querySelector('#direccion').addEventListener('change', function (e) {
+        
+        var direccion = document.getElementById('direccion').value
+        that.usaDireccion(direccion, direccionesModulo.agregarDireccionYMostrarEnMapa)
+        
+                
     })
   }
 

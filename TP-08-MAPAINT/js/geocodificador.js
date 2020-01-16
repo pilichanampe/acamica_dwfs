@@ -33,11 +33,22 @@ geocodificadorModulo = (function () {
       }    
     })
 
-//    document.querySelector('#direccion').addEventListener('input', function (e) {
-    document.querySelector('#direccion').addEventListener('change', function () {
+    document.querySelector('#direccion').addEventListener('change', function (e) {//este change me toma cualquier tipo de cambio, no tiene en cuenta si yo elijo algo de la lista o no
+    //document.querySelector('#direccion').addEventListener('change', function (e) {
+      
+      var direccion = document.getElementById('direccion').value
+      console.log(e.target.value)
+      console.log(direccion)
+      that.usaDireccion(direccion, direccionesModulo.agregarDireccionYMostrarEnMapa)
+      
+      
+   //}
+     
+      
         
-        var direccion = document.getElementById('direccion').value
-        that.usaDireccion(direccion, direccionesModulo.agregarDireccionYMostrarEnMapa)
+        
+       
+        
         
                 
     })

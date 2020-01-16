@@ -8,17 +8,21 @@ lugaresModulo = (function () {
         página (las direcciones ingresables por el usuario).
         Para esto creá un círculo con radio de 20000 metros y usalo para fijar
         los límites de la búsqueda de dirección. El círculo no se debe ver en el mapa. */
-        let circulo = new google.maps.Circle({
-          center: posicionCentral, map: mapa,  radius: 20000, visible: false,
-         })
-     let autocompletadorDireccion = new google.maps.places.Autocomplete(document.getElementById("direccion"));
-     let autocompletadorDesde = new google.maps.places.Autocomplete(document.getElementById("desde"));
-     let autocompletadorHasta = new google.maps.places.Autocomplete(document.getElementById("hasta"));
-     let autocompletadorAgregar = new google.maps.places.Autocomplete(document.getElementById("agregar"));
-     autocompletadorDireccion.setBounds(circulo.getBounds())
-     autocompletadorDesde.setBounds(circulo.getBounds())
-     autocompletadorHasta.setBounds(circulo.getBounds())
-     autocompletadorAgregar.setBounds(circulo.getBounds())      
+        var circulo = new google.maps.Circle({
+          visible: false,
+          map: mapa,
+          center: posicionCentral,
+          radius: 20000
+        });
+
+        var direccion = new google.maps.places.Autocomplete(document.getElementById('direccion'));
+        var desde = new google.maps.places.Autocomplete(document.getElementById('desde'));
+        var hasta = new google.maps.places.Autocomplete(document.getElementById('hasta'));
+        var agregar = new google.maps.places.Autocomplete(document.getElementById('agregar'));
+        direccion.setBounds(circulo.getBounds())
+        desde.setBounds(circulo.getBounds())
+        hasta.setBounds(circulo.getBounds())
+        agregar.setBounds(circulo.getBounds())
   }
 
     // Inicializo la variable servicioLugares y llamo a la función autocompletar 

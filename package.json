@@ -1,0 +1,25 @@
+{
+  "name": "que-veo-hoy",
+  "version": "1.0.0",
+  "description": "Repo para cargar los archivos de la carrera de Desarrollo Web Full Stack 2019 de Acámica",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pilichanampe/acamica_dwfs.git"
+  },
+  "author": "Maria del Pilar Chanampe",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pilichanampe/acamica_dwfs/issues"
+  },
+  "homepage": "https://github.com/pilichanampe/acamica_dwfs#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "mysql": "^2.18.1"
+  }
+}

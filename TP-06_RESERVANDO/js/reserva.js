@@ -39,6 +39,10 @@ Reserva.prototype.calcularAdicionales = function(){
     return adicionales;
 }
 
+Reserva.prototype.calcularDescuentos = function() {
+    if (cantPersonas <)
+}
+
 Reserva.prototype.calcularPrecioFinal = function() {
     return precioFinal = this.calcularPrecioBase() - this.calcularDescuentos() + this.calcularAdicionales();
 }

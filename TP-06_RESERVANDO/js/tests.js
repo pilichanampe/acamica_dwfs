@@ -119,7 +119,7 @@ describe('Test de function precioBase()', function(){
 //test de function calcularAdicionales().
 describe('Test de function calcularAdicionales()', function(){
     it('Un restaurante calcula correctamente su precio total.', function(){
-            expect(listadoDeReservas[0].calcularAdicionales()).to.be.equal(2800);
+            expect(listadoDeReservas[0].calcularAdicionales()).to.be.equal(280);
             
     });
 })
